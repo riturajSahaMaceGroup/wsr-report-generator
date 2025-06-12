@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Drawer, Button, Box, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleForm } from '../applicationStore/formSlice';
+import FullDataForm from './FullDataForm';
 
 export default function BottomSheetModal() {
 //   const [open, setOpen] = useState(false);
@@ -13,8 +14,8 @@ export default function BottomSheetModal() {
 
   return (
     <div>
-      <Button variant="contained" onClick={toggleDrawer(true)}>
-        Open Bottom Sheet
+      <Button variant="contained" onClick={toggleDrawer(true)} sx={{marginTop:"30px"}}>
+       Edit data
       </Button>
       <Drawer
         anchor="bottom"
@@ -26,14 +27,12 @@ export default function BottomSheetModal() {
             borderTopRightRadius: 16,
             padding: 2,
             minHeight: '30vh',
+            maxHeight:"60vh"
           },
         }}
       >
         <Box role="presentation">
-          <Typography variant="h6">Bottom Sheet Content</Typography>
-          <Typography variant="body1">
-            You can place any content here, like forms, lists, or actions.
-          </Typography>
+          <FullDataForm/>
         </Box>
       </Drawer>
     </div>

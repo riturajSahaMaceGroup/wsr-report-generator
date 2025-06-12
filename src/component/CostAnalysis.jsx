@@ -78,12 +78,11 @@ const CostAnalysis = () => {
                 flex: .5,
             }}>
                 <PieChart
-
                     series={[
                         {
                             data: [
                                 { id: 0, value: cost.spent, label: 'Actual Cost Per week', color: "green" },
-                                { id: 1, value: cost.budget, label: 'Budget Per week: ', color: "blue" },
+                                { id: 1, value: cost.budget-cost.spent, label: 'Budget Per week: ', color: "blue" },
                             ],
                         },
                     ]}

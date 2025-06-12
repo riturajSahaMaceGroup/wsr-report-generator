@@ -115,7 +115,7 @@ export const formSlice = createSlice({
         //   state.value -= 1
         // },
         submitFormData: (state, action) => {
-               state = action.payload
+            return { ...state, ...action.payload };
         },
         toggleForm: (state)=>{
             state.formVisibility=!state.formVisibility
