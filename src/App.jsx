@@ -8,7 +8,7 @@ import Injetion from './component/Injetion'
 import GithubSummary from './component/GithubSummary'
 import GithubSummaryHighlight from './component/GithubSummaryHighlight'
 import Divider from '@mui/material/Divider'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import { store } from './applicationStore/store'
 import BottomSheetModal from './component/BottomSheetModal'
 
@@ -31,23 +31,22 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
     <div style={{
       display:"flex",
       flexDirection:"column",
-      height: "100%",
+      // height: "99.5vh",
       width: "95vw",
-      border:"1px solid black"
+      // border:"1px solid black",
+      flex:1
     }}>
-      <span style={{fontWeight:"bold",fontSize:"25px", marginTop:"10px",marginBottom:"10px"}}>{`pAIge weekly Status Report: `}<span style={{fontWeight:"bold",fontSize:"15px", marginTop:"10px",marginBottom:"10px"}}>{`${currentDateTime}`}</span></span>
+    <DateRender/>
     <div style={{
       display: "flex",
       height: "100%",
       width:"100%",
-      // border:"1px solid black",
+      border:"1px solid black",
       flex: 1
     }}>
       <div style={{
         display: "flex",
         flexDirection: "column",
-        // border:"1px solid black",
-       
         paddingLeft:"10px",
         flex: .5
       }}>
@@ -90,7 +89,7 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
         marginLeft:"10px",
         background:"rgba(136, 142, 224, 0.29)",
         boxShadow: "0 0 12px rgb(218, 153, 191)",
-        height:"97.5%"
+        height:"97.5vh"
       }}></Divider>
       <div style={{
         display: "flex",
@@ -117,5 +116,8 @@ const [currentDateTime, setCurrentDateTime] = useState(new Date());
     </Provider>
   )
 }
-
+const DateRender = ()=>{
+  const mDate = useSelector((state)=> state.mForm.submissionDate)
+  return <span style={{fontWeight:"bold",fontSize:"25px", marginTop:"10px",marginBottom:"10px"}}>{`pAIge weekly Status Report: `}<span style={{fontWeight:"bold",fontSize:"15px", marginTop:"10px",marginBottom:"10px"}}>{`${mDate}`}</span></span>
+}
 export default App

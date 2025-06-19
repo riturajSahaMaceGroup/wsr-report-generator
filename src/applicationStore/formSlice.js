@@ -11,19 +11,19 @@ const initialState = {
             "Avg. Response Time": "1.34 min",
             "Questions Asked": 195,
             "Blocked (PII)": 14,
-
+            "Max Response Time":"5 min"
         },
         week_1: {
             "Avg. Response Time": "1.99 min",
             "Questions Asked": 100,
             "Blocked (PII)": 8,
-
+            "Max Response Time":"5 min"
         },
         week_2: {
             "Avg. Response Time": "2.58 min",
             "Questions Asked": 90,
             "Blocked (PII)": 0,
-
+            "Max Response Time":"5 min"
         }
     },
     ingestion:[
@@ -97,7 +97,8 @@ const initialState = {
             value: ["KPI Dashboard Monitoring", "Pinned Python Library Versions", "Sanitization of Output Keywords"]
         }
     ],
-    formVisibility:false
+    formVisibility:false,
+    submissionDate:"Thu Jun 19 2025"
 }
 
 export const formSlice = createSlice({

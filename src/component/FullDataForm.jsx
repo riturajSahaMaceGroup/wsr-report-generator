@@ -4,66 +4,18 @@ import {
   Accordion, AccordionSummary, AccordionDetails, Button
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { submitFormData } from '../applicationStore/formSlice';
 
-const initialData = {
-  cost: {
-    spent: 555,
-    budget: 1250,
-    PTU_Alert_Last_triggered: "14th May 2025"
-  },
-  usage: {
-    week_0: { "Avg. Response Time": "1.34 min", "Questions Asked": 195, "Blocked (PII)": 14 },
-    week_1: { "Avg. Response Time": "1.99 min", "Questions Asked": 100, "Blocked (PII)": 8 },
-    week_2: { "Avg. Response Time": "2.58 min", "Questions Asked": 90, "Blocked (PII)": 0 }
-  },
-  ingestion: [
-    { title: "Documents Ingested / Day", value: 6201 },
-    { title: "Failed Ingestions", value: 90 },
-    { title: "Success Rate", value: "~99%" }
-  ],
-  githubSummary: {
-    current_week: [
-      { title: "Backlog", value: 9 },
-      { title: "In Development", value: 8 },
-      { title: "Pending Deployment", value: 5 }
-    ],
-    prev_week: [
-      { title: "Backlog", value: 7 },
-      { title: "In Development", value: 14 },
-      { title: "Pending Deployment", value: 2 }
-    ],
-    prev_prev_week: [
-      { title: "Backlog", value: 7 },
-      { title: "In Development", value: 20 },
-      { title: "Pending Deployment", value: 5 }
-    ]
-  },
-  gitHighlight: [
-    {
-      heading: "Backlog",
-      value: ["Customizable Response Length", "Disaster Recovery Strategy for MACE"]
-    },
-    {
-      heading: "Development",
-      value: [
-        "Secret Expire Handling", "Model Version Pinning & Upgrade Policy",
-        "Word Add-in User Authentication", "Semantic Re-Ranking in AI Search"
-      ]
-    },
-    {
-      heading: "Ready To Deploy ",
-      value: [
-        "KPI Dashboard Monitoring", "Pinned Python Library Versions",
-        "Sanitization of Output Keywords"
-      ]
-    }
-  ]
-};
 
 export default function FullDataForm() {
+  const initialData = useSelector((state) => state.mForm)
   const [formData, setFormData] = useState(initialData);
+
+  React.useEffect(() => {
+    setFormData(initialData);
+  }, [initialData]);
+
 
   const handleCostChange = (key) => (e) => {
     setFormData((prev) => ({
@@ -87,13 +39,27 @@ export default function FullDataForm() {
 
   const handleIngestionChange = (index) => (e) => {
     const newIngestion = [...formData.ingestion];
-    newIngestion[index].value = e.target.value;
+    newIngestion[index] = { ...newIngestion[index], value: e.target.value };
+    // calculate the success %
+
+    const ingested = Number(newIngestion[0].value);
+    const failed = Number(newIngestion[1].value);
+
+    const successRate = ingested
+      ? `~${(((ingested - failed) / ingested) * 100).toFixed(2)}%`
+      : "~0%";
+
+    newIngestion[2] = {
+      ...newIngestion[2],
+      value: successRate
+    };
+
     setFormData((prev) => ({ ...prev, ingestion: newIngestion }));
   };
 
   const handleGithubSummaryChange = (week, index) => (e) => {
     const newWeekData = [...formData.githubSummary[week]];
-    newWeekData[index].value = e.target.value;
+    newWeekData[index] = { ...newWeekData[index], value: e.target.value }
     setFormData((prev) => ({
       ...prev,
       githubSummary: {
@@ -102,17 +68,19 @@ export default function FullDataForm() {
       }
     }));
   };
-
+  const handleSubmitDateChange = () => (e) => {
+    setFormData((prev) => ({ ...prev, submissionDate: e.target.value }))
+  }
   const handleGitHighlightChange = (sectionIndex, itemIndex) => (e) => {
     const newHighlights = [...formData.gitHighlight];
     newHighlights[sectionIndex].value[itemIndex] = e.target.value;
     setFormData((prev) => ({ ...prev, gitHighlight: newHighlights }));
   };
-  const dispatch  = useDispatch();
+  const dispatch = useDispatch();
   const handleSubmit = () => {
     // console.log("Submitted Data:", formData);
     alert("Form submitted! Check console for data.");
-  
+
     dispatch(submitFormData(formData))
   };
 
@@ -171,8 +139,9 @@ export default function FullDataForm() {
                 <TextField
                   fullWidth
                   label={item.title}
-                  value={item.value}
+                  value={item.value.toString()}
                   onChange={handleIngestionChange(idx)}
+                  disabled={idx == 2 ? true : false}
                 />
               </Grid>
             ))}
@@ -193,7 +162,7 @@ export default function FullDataForm() {
                     <TextField
                       fullWidth
                       label={item.title}
-                      value={item.value}
+                      value={item.value + ""}
                       onChange={handleGithubSummaryChange(week, idx)}
                     />
                   </Grid>
@@ -219,7 +188,7 @@ export default function FullDataForm() {
                     key={itemIdx}
                     fullWidth
                     label={`Item ${itemIdx + 1}`}
-                    value={item}
+                    value={item.toString()}
                     onChange={handleGitHighlightChange(sectionIdx, itemIdx)}
                     sx={{ mb: 2 }}
                   />
@@ -227,6 +196,19 @@ export default function FullDataForm() {
               </AccordionDetails>
             </Accordion>
           ))}
+        </CardContent>
+      </Card>
+
+      {/*Submit date*/}
+      <Card sx={{ mb: 2 }}>
+        <CardContent>
+          <Typography variant="h6">Submission Date</Typography>
+          <TextField
+            fullWidth
+            label={`Submission Date`}
+            value={formData.submissionDate}
+            onChange={handleSubmitDateChange()}
+            sx={{ mb: 2 }} />
         </CardContent>
       </Card>
 
