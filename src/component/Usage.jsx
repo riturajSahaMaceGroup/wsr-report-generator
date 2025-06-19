@@ -3,6 +3,8 @@ import TableContent from './TableContent'
 import { BarChart, LineChart } from '@mui/x-charts'
 import Divider from '@mui/material/Divider'
 import { useSelector } from 'react-redux'
+import { RAG_STATUS } from './CostAnalysis'
+import useGetRagStatus from '../hooks/useGetRagStatus'
 
 const Usage = () => {
 
@@ -27,12 +29,18 @@ const Usage = () => {
 
 
   const responseTimes = React.useMemo(() => [
-    parseFloat(usage.week_2["Avg. Response Time"].replace(" sec", "")),
-    parseFloat(usage.week_1["Avg. Response Time"].replace(" sec", "")),
-    parseFloat(usage.week_0["Avg. Response Time"].replace(" sec", ""))
+    // parseFloat(usage.week_2["Avg. Response Time"].replace(" min", "")),
+    parseFloat(usage.week_2["Avg. Response Time"].split(" ")[0]),
+    // parseFloat(usage.week_1["Avg. Response Time"].replace(" min", "")),
+    parseFloat(usage.week_1["Avg. Response Time"].split(" ")[0]),
+    // parseFloat(usage.week_0["Avg. Response Time"].replace(" min", ""))
+    parseFloat(usage.week_0["Avg. Response Time"].split(" ")[0])
   ], [usage]);
 
   return (
+    <div  style={{
+      display: "flex",
+  }}>    
     <div style={{
       display: "flex",
       // width:"100%"
@@ -49,7 +57,7 @@ const Usage = () => {
         width: "100%"
       }}>
         {Object.keys(usage.week_0).map((value, idx) => {
-          return <TableContent title={value} value={usage.week_0[value]} key={idx}></TableContent>
+          return value=="Blocked (PII)"?<TableContent title={value} value={`${usage.week_0[value]} (${(usage.week_0[value]/usage.week_0["Questions Asked"]*100).toFixed(2)}%)`} key={idx}></TableContent>:<TableContent title={value} value={usage.week_0[value]} key={idx}></TableContent>
         })}
 
 
@@ -71,7 +79,7 @@ const Usage = () => {
             xAxis={[{ scaleType: 'point', data: ['Week Prev. -1', 'Prev. Week', 'Curr. Week'] }]}
             series={[
               {
-                label: 'Avg. Response Time (sec)',
+                label: 'Avg. Response Time (min)',
                 data: responseTimes
               },
             ]}
@@ -79,21 +87,7 @@ const Usage = () => {
             margin={{ left: 0, right: 50, top: 20, bottom: 30 }}
           />
         </div>
-        {/* <span>Usage</span>
-        <BarChart
-          xAxis={[{
-            data: prepData.map(item => item.title),
-            categoryGapRatio: 0.9,
-            barGapRatio: 0.9,
-          }]}
-          series={[
-            {
-              data: prepData.map(item => item.asked)
-            },
-          ]}
-          height={150}
-          width={300}
-        /> */}
+        
         <Divider orientation='vertical' sx={{background:"#ed816680"}}/>
         <div style={{
           display: "flex",
@@ -114,13 +108,13 @@ const Usage = () => {
                   dataKey: 'success',
                   label: 'Success',
                   stack: 'total',
-                  color: '#4caf50',
+                  color: '#939494',
                 },
                 {
                   dataKey: 'fail',
                   label: 'Blocked (PII)',
                   stack: 'total',
-                  color: '#f44336',
+                  color: '#e9a7de',
                 }
               ]}
               height={150}
@@ -137,7 +131,9 @@ const Usage = () => {
 
 
       </div>
-
+    </div>
+    <RAG_STATUS  status={useGetRagStatus("usage")} />
+    
     </div>
   )
 }

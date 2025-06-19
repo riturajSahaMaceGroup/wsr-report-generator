@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -15,6 +15,16 @@ import BottomSheetModal from './component/BottomSheetModal'
 function App() {
   const [count, setCount] = useState(0)
   
+const [currentDateTime, setCurrentDateTime] = useState(new Date());
+
+ React.useEffect(() => {
+ const timer = setInterval(() => {
+ setCurrentDateTime(new Date());
+ }, 1000); // updates every second
+
+ return () => clearInterval(timer); // cleanup on unmount
+ }, []);
+
   return (
     <Provider store={store}>
 
@@ -25,7 +35,7 @@ function App() {
       width: "95vw",
       border:"1px solid black"
     }}>
-      <span style={{fontWeight:"bold",fontSize:"25px", marginTop:"10px",marginBottom:"10px"}}>pAIge weekly Status Report</span>
+      <span style={{fontWeight:"bold",fontSize:"25px", marginTop:"10px",marginBottom:"10px"}}>{`pAIge weekly Status Report: `}<span style={{fontWeight:"bold",fontSize:"15px", marginTop:"10px",marginBottom:"10px"}}>{`${currentDateTime}`}</span></span>
     <div style={{
       display: "flex",
       height: "100%",

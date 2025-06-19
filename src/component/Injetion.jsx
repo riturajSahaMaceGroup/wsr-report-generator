@@ -2,8 +2,9 @@ import React from 'react'
 import TableContent from './TableContent'
 import Divider from '@mui/material/Divider'
 import { Gauge, PieChart } from '@mui/x-charts'
-import { Note } from './CostAnalysis'
+import { Note, RAG_STATUS } from './CostAnalysis'
 import { useSelector } from 'react-redux'
+import useGetRagStatus from '../hooks/useGetRagStatus'
 
 const Injetion = () => {
 
@@ -12,7 +13,6 @@ const Injetion = () => {
         <div style={{
             display: "flex",
             // width:"100%"
-
             flex: 1
         }}>
             <div style={{
@@ -37,8 +37,8 @@ const Injetion = () => {
                     series={[
                         {
                             data: [
-                                { id: 0, value: data[0].value - data[1].value, label: 'Success', color: "green" },
-                                { id: 1, value: data[1].value, label: 'failure', color: "red" },
+                                { id: 0, value: data[0].value - data[1].value, label: 'Success', color: "#b5b0b3" },
+                                { id: 1, value: data[1].value, label: 'failure', color: "#6c645f" },
                             ],
                         },
                     ]}
@@ -56,6 +56,7 @@ const Injetion = () => {
                     height={100}
                 /> */}
             </div>
+            <RAG_STATUS status={useGetRagStatus("dataIngestion")} />
         </div>
     )
 }

@@ -8,19 +8,19 @@ const initialState = {
     },
     usage: {
         week_0: {
-            "Avg. Response Time": "1.34 sec",
+            "Avg. Response Time": "1.34 min",
             "Questions Asked": 195,
             "Blocked (PII)": 14,
 
         },
         week_1: {
-            "Avg. Response Time": "1.99 sec",
+            "Avg. Response Time": "1.99 min",
             "Questions Asked": 100,
             "Blocked (PII)": 8,
 
         },
         week_2: {
-            "Avg. Response Time": "2.58 sec",
+            "Avg. Response Time": "2.58 min",
             "Questions Asked": 90,
             "Blocked (PII)": 0,
 

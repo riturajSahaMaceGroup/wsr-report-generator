@@ -33,9 +33,9 @@ const GithubSummary = () => {
             <BarChart
                 xAxis={[{ id: 'categories', data: categories, scaleType: 'band' }]}
                 series={[
-                    { data: currentWeekValues, label: 'Current Week', color: '#1976d2' },
-                    { data: prevWeekValues, label: 'Previous Week', color: '#2e7d32' },
-                    { data: prevPrevWeekValues, label: 'Two Weeks Prior', color: '#d32f2f' }
+                    { data: currentWeekValues, label: 'Current Week', color: '#b0859f' },
+                    { data: prevWeekValues, label: 'Previous Week', color: '#202127' },
+                    { data: prevPrevWeekValues, label: 'Two Weeks Prior', color: '#838488' }
                 ]}
 
                 width={500}

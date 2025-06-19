@@ -14,9 +14,9 @@ const initialData = {
     PTU_Alert_Last_triggered: "14th May 2025"
   },
   usage: {
-    week_0: { "Avg. Response Time": "1.34 sec", "Questions Asked": 195, "Blocked (PII)": 14 },
-    week_1: { "Avg. Response Time": "1.99 sec", "Questions Asked": 100, "Blocked (PII)": 8 },
-    week_2: { "Avg. Response Time": "2.58 sec", "Questions Asked": 90, "Blocked (PII)": 0 }
+    week_0: { "Avg. Response Time": "1.34 min", "Questions Asked": 195, "Blocked (PII)": 14 },
+    week_1: { "Avg. Response Time": "1.99 min", "Questions Asked": 100, "Blocked (PII)": 8 },
+    week_2: { "Avg. Response Time": "2.58 min", "Questions Asked": 90, "Blocked (PII)": 0 }
   },
   ingestion: [
     { title: "Documents Ingested / Day", value: 6201 },
