@@ -46,12 +46,13 @@ const Usage = () => {
       <TableContainer component={Paper}
         sx={{
           width:"300px" , // Set a smaller width
-          marginLeft: 2,
+          // marginLeft: 2,
           // mt: 2,
           boxShadow: 3,
           borderRadius: 2,
-          marginTop:2,
-          marginBottom:2
+          // marginTop:2,
+          marginBottom:2,
+         
         }}
       >
         <Table size='small'>
@@ -130,7 +131,7 @@ const Usage = () => {
             alignItems: "center",
             fontSize: "14px",
             justifyContent: "center",
-
+            paddingLeft:"8px"
           }}>
 
             <ResponseTimeTable responseData={usage} />
