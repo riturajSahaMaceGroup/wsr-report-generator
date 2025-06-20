@@ -28,7 +28,7 @@ const initialState = {
     },
     ingestion:[
         {
-            title: "Documents Ingested / Day",
+            title: "Documents Ingested",
             value: 6201,
         },
         {
