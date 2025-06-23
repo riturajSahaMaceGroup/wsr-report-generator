@@ -73,9 +73,25 @@ export default function FullDataForm() {
   }
   const handleGitHighlightChange = (sectionIndex, itemIndex) => (e) => {
     const newHighlights = [...formData.gitHighlight];
+
+    newHighlights[sectionIndex] = {
+      ...newHighlights[sectionIndex],
+      value: [...newHighlights[sectionIndex].value],
+    };
+
     newHighlights[sectionIndex].value[itemIndex] = e.target.value;
     setFormData((prev) => ({ ...prev, gitHighlight: newHighlights }));
   };
+  const handleAddGitHighlightItem = (sectionIndex) => {
+    const newHighlights = [...formData.gitHighlight];
+    const updatedSection = {
+      ...newHighlights[sectionIndex],
+      value: [...newHighlights[sectionIndex].value, ''], // Add empty string or default value
+    };
+    newHighlights[sectionIndex] = updatedSection;
+    setFormData((prev) => ({ ...prev, gitHighlight: newHighlights }));
+  };
+
   const dispatch = useDispatch();
   const handleSubmit = () => {
     // console.log("Submitted Data:", formData);
@@ -182,7 +198,7 @@ export default function FullDataForm() {
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>{section.heading}</Typography>
               </AccordionSummary>
-              <AccordionDetails>
+              {/*<AccordionDetails>
                 {section.value.map((item, itemIdx) => (
                   <TextField
                     key={itemIdx}
@@ -194,6 +210,26 @@ export default function FullDataForm() {
                   />
                 ))}
               </AccordionDetails>
+*/}
+              <AccordionDetails>
+                {section.value.map((item, itemIdx) => (
+                  <TextField
+                    key={itemIdx}
+                    fullWidth
+                    label={`Item ${itemIdx + 1}`}
+                    value={item.toString()}
+                    onChange={handleGitHighlightChange(sectionIdx, itemIdx)}
+                    sx={{ mb: 2 }}
+                  />
+                ))}
+                <Button
+                  variant="outlined"
+                  onClick={() => handleAddGitHighlightItem(sectionIdx)}
+                >
+                  Add Item
+                </Button>
+              </AccordionDetails>
+
             </Accordion>
           ))}
         </CardContent>
