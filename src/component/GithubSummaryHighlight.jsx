@@ -29,9 +29,7 @@ const GithubSummaryHighlight = () => {
                 return <div key={idx} style={{
                     display: "flex",
                     flexDirection: "column",
-                    // border: ".5px solid black",
-                    boxShadow: "0 0 12px #cce4f0", // Drop shadow
-                    // filter: "blur(2px)",// Blur effect
+                    boxShadow: "0 0 12px #cce4f0", 
                     textAlign: "start",
                     borderRadius: "5px",
 

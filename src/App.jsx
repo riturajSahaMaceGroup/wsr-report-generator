@@ -112,8 +112,15 @@ function App() {
               background: "linear-gradient(90deg,rgba(222, 82, 117, 1) 0%, rgba(199, 87, 149, 1) 45%, rgba(104, 83, 237, 1) 100%)"
             }}  >Application Development</span>
             <GithubSummary />
-            <Divider sx={{ fontSize: "12px", fontWeight: "bold", width: "5px" }} >Summary Highlight</Divider>
+            
+
+            {/* <Divider sx={{ fontSize: "12px", fontWeight: "bold", width: "1px", background: "rgba(136, 142, 224, 0.29)", }} orientation='horizontal'></Divider> */}
+            <span style={{
+              fontSize:"16px",
+              fontWeight:"bold"
+            }}>Summary Highlight</span>
             <GithubSummaryHighlight />
+            
           </div>
         </div>
         <BottomSheetModal />

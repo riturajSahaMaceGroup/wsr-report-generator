@@ -18,7 +18,9 @@ const GithubSummary = () => {
         }}>
             <div style={{
                 display: "flex",
-                gap: "5px"
+                gap: "5px",
+                alignItems:"center",
+                justifyContent:"center"
             }}>
                 {data.current_week.map((item, idx) => {
                     return <div>
