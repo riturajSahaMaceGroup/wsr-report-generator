@@ -9,7 +9,7 @@ const GithubSummary = () => {
     const categories = React.useMemo(()=>data.current_week.map(item => item.title), [data]);
     const currentWeekValues = React.useMemo(() => data.current_week.map(item => item.value), [data]);
     const prevWeekValues = React.useMemo(() => data.prev_week.map(item => item.value), [data]);
-    const prevPrevWeekValues = React.useMemo(() => data.prev_prev_week.map(item => item.value), [data]);
+    // const prevPrevWeekValues = React.useMemo(() => data.prev_prev_week.map(item => item.value), [data]);
 
     return (
         <div style={{
@@ -35,7 +35,7 @@ const GithubSummary = () => {
                 series={[
                     { data: currentWeekValues, label: 'Current Week', color: '#b0859f' },
                     { data: prevWeekValues, label: 'Previous Week', color: '#202127' },
-                    { data: prevPrevWeekValues, label: 'Two Weeks Prior', color: '#838488' }
+                    // { data: prevPrevWeekValues, label: 'Two Weeks Prior', color: '#838488' }
                 ]}
 
                 width={500}

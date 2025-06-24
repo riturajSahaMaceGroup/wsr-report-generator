@@ -14,10 +14,11 @@ const Usage = () => {
   const dataPrep = React.useMemo(() => {
     let mprep = [];
     Object.keys(usage).forEach((val) => {
-      const asked = usage[val]["Questions Asked"];
-      const blocked = usage[val]["Blocked (PII)"];
+      const asked = Number(usage[val]["Questions Asked"]);
+      const blocked = Number(usage[val]["Blocked (PII)"]);
+      console.log("Bloked PII: ",blocked)
       const tempObj = {
-        title: val == 'week_0' ? "curr. week" : val == "week_1" ? "Week -1" : "week -2",
+        title: val == 'week_0' ? "curr.week" : val == "week_1" ? "curr.week-1" : "curr.week-2",
         asked,
         blocked,
         success: asked - blocked,
@@ -25,18 +26,29 @@ const Usage = () => {
       };
       mprep.push(tempObj);
     });
+    console.log("dataPrep: ", mprep); 
     return mprep
   }, [usage])
 
 
-  const ResponseTimeTable = (props) => {
+  const ResponseTimeTable =  React.memo((props) => { {
     const { responseData } = props
-    const mResponseData = Object.entries(responseData).map(([week, data]) => ({
-      week,
-      avgResponseTime: data["Avg. Response Time"],
-      maxResponseTime: data["Max Response Time"]
-    }));
-
+    // const mResponseData = Object.entries(responseData).map(([week, data]) => ({
+    //   week,
+    //   avgResponseTime: data["Avg. Response Time"],
+    //   maxResponseTime: data["Max Response Time"]
+    // }));
+    
+    const mResponseData = Object.entries(responseData).map(([week, data]) => {
+      const weekNumber = parseInt(week.split("_")[1], 10);
+      const formattedWeek = weekNumber === 0 ? "curr.week" : `curr.week-${weekNumber}`;
+    
+      return {
+        week: formattedWeek,
+        avgResponseTime: data["Avg. Response Time"],
+        maxResponseTime: data["Max Response Time"]
+      };
+    });
     const cellStyle = {
       fontSize: '0.7rem', // Smaller font
       padding: '2px 5px' // Minimal padding
@@ -45,7 +57,7 @@ const Usage = () => {
     return (
       <TableContainer component={Paper}
         sx={{
-          width:"300px" , // Set a smaller width
+          width:"280px" , // Set a smaller width
           // marginLeft: 2,
           // mt: 2,
           boxShadow: 3,
@@ -76,7 +88,7 @@ const Usage = () => {
       </TableContainer>
     );
   };
-
+});
   const responseTimes = React.useMemo(() => [
     // parseFloat(usage.week_2["Avg. Response Time"].replace(" min", "")),
     parseFloat(usage.week_2["Avg. Response Time"].split(" ")[0]),
@@ -87,13 +99,11 @@ const Usage = () => {
   ], [usage]);
 
   return (
-    <div style={{
-      display: "flex",
-      flex:.5
-    }}>
+    <div style={{display:"flex"}}>
       <div style={{
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
+        width:"100%",
       }}>
         <div style={{
           display: "flex",
@@ -127,11 +137,12 @@ const Usage = () => {
           <div style={{
             display: "flex",
             flexDirection: "column",
-            flex: .5,
+            flex: .49,
             alignItems: "center",
             fontSize: "14px",
             justifyContent: "center",
-            paddingLeft:"8px"
+            paddingLeft:"8px",
+           
           }}>
 
             <ResponseTimeTable responseData={usage} />
@@ -153,7 +164,7 @@ const Usage = () => {
           }}>
             <span>Avg Response time</span>
             <LineChart
-              xAxis={[{ scaleType: 'point', data: ['Week Prev. -1', 'Prev. Week', 'Curr. Week'] }]}
+              xAxis={[{ scaleType: 'point', data: ['curr.week-2', 'curr.week-1', 'curr.Week'] }]}
               series={[
                 {
                   label: 'Avg. Response Time (min)',
@@ -195,7 +206,7 @@ const Usage = () => {
                   }
                 ]}
                 height={150}
-                width={300}
+               
                 margin={{ left: 0, right: 50, top: 20, bottom: 30 }}
 
                 yAxis={[{
