@@ -172,7 +172,7 @@ const Usage = () => {
                   data: responseTimes
                 },
               ]}
-              height={200}
+              // height={200}
               margin={{ left: 0, right: 50, top: 20, bottom: 30 }}
             />
           </div>
