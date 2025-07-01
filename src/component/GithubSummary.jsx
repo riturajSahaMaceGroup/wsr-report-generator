@@ -9,7 +9,7 @@ const GithubSummary = () => {
     const categories = React.useMemo(()=>data.current_week.map(item => item.title), [data]);
     const currentWeekValues = React.useMemo(() => data.current_week.map(item => item.value), [data]);
     const prevWeekValues = React.useMemo(() => data.prev_week.map(item => item.value), [data]);
-    // const prevPrevWeekValues = React.useMemo(() => data.prev_prev_week.map(item => item.value), [data]);
+    const prevPrevWeekValues = React.useMemo(() => data.prev_prev_week.map(item => item.value), [data]);
 
     return (
         <div style={{
