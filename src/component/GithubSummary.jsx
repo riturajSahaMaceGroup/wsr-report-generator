@@ -37,7 +37,7 @@ const GithubSummary = () => {
                 series={[
                     { data: currentWeekValues, label: 'Current Week', color: '#b0859f' },
                     { data: prevWeekValues, label: 'Previous Week', color: '#202127' },
-                    // { data: prevPrevWeekValues, label: 'Two Weeks Prior', color: '#838488' }
+                    { data: prevPrevWeekValues, label: 'Two Weeks Prior', color: '#838488' }
                 ]}
 
                 width={500}
