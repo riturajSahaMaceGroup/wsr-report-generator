@@ -165,13 +165,14 @@ const Usage = () => {
             <span>Avg Response time</span>
             <LineChart
               xAxis={[{ scaleType: 'point', data: ['curr.week-2', 'curr.week-1', 'curr.Week'] }]}
+              yAxis={[{ min: 0, max: 10, valueFormatter: (v) => `${v} min` }]}
               series={[
                 {
                   label: 'Avg. Response Time (min)',
                   data: responseTimes
                 },
               ]}
-              height={100}
+              height={200}
               margin={{ left: 0, right: 50, top: 20, bottom: 30 }}
             />
           </div>
