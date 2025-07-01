@@ -68,20 +68,20 @@ const initialState = {
                 value: 2
             }
         ],
-        // prev_prev_week: [
-        //     {
-        //         title: "Backlog",
-        //         value: 7
-        //     },
-        //     {
-        //         title: "In Development",
-        //         value: 20
-        //     },
-        //     {
-        //         title: "Pending Deployment",
-        //         value: 5
-        //     }
-        // ]
+        prev_prev_week: [
+            {
+                title: "Backlog",
+                value: 7
+            },
+            {
+                title: "In Development",
+                value: 20
+            },
+            {
+                title: "Pending Deployment",
+                value: 5
+            }
+        ]
     },
     gitHighlight:[
         {
