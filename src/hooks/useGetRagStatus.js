@@ -23,7 +23,7 @@ const useGetRagStatus = (statusOf) => {
         switch (statusOf) {
             case 'cost':
                 const mCal = value.spent / value.budget * 100;
-                console.log("mCal: ",mCal)
+                // console.log("mCal: ",mCal)
                
                 return  mCal <= 70 ? "G" : mCal > 70 && mCal <= 85 ? "A" : "R";
 

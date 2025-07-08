@@ -1,5 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import { RenderMDX } from './RenderMdx';
 
 const GithubSummaryHighlight = () => {
     // const [data, setData] = React.useState([
@@ -16,22 +19,34 @@ const GithubSummaryHighlight = () => {
     //         value: ["KPI Dashboard Monitoring", "Pinned Python Library Versions", "Sanitization of Output Keywords"]
     //     }
     // ])
-    const data = useSelector((state)=> state.mForm.gitHighlight)
+    const data = useSelector((state) => state.mForm.workstreamOverview)
+    //     const markdownContent = `
+    // ### Hello, World!
+    // This is a **Markdown** example rendered in React.
+
+    // - Item 1
+    // - Item 2
+    // - Item 3
+
+    // [Visit React](https://reactjs.org)
+    // `;
     return (
         <div style={{
             display: "flex",
             gap: "5px",
             paddingTop: "13px",
             paddingLeft: "5px",
-            paddingRight: "5px"
+            paddingRight: "5px",
+            flex: 0.6
         }}>
-            {data.map((item, idx) => {
+            {/* {data.map((item, idx) => {
                 return <div key={idx} style={{
                     display: "flex",
                     flexDirection: "column",
                     boxShadow: "0 0 12px #cce4f0", 
                     textAlign: "start",
                     borderRadius: "5px",
+                    flex:1
 
                 }}  >
                     <span style={{ fontWeight: "bold", paddingLeft: "5px" }}>{item.heading}</span>
@@ -43,8 +58,26 @@ const GithubSummaryHighlight = () => {
                             })
                         }
                     </ul>
+                    <div style={{
+                        fontSize:"16px",
+                    }}>
+
+                   
+
+                    </div>
                 </div>
-            })}
+            })} */}
+            <div style={{
+                display: "flex",
+                flexDirection: "column",
+                boxShadow: "0 0 12px #cce4f0",
+                textAlign: "start",
+                borderRadius: "5px",
+                flex: 1,
+               
+            }}  >
+                <RenderMDX content={data.value} />
+            </div>
         </div>
     )
 }

@@ -6,6 +6,15 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useDispatch, useSelector } from 'react-redux';
 import { submitFormData } from '../applicationStore/formSlice';
+import { MDXEditor } from '@mdxeditor/editor'
+import {
+  headingsPlugin, listsPlugin, quotePlugin, thematicBreakPlugin, toolbarPlugin,
+  BoldItalicUnderlineToggles, CreateLink, ListsToggle, Separator, UndoRedo,
+  useCellValue,
+  markdown$,
+  RealmContext
+} from '@mdxeditor/editor'
+
 
 
 export default function FullDataForm() {
@@ -71,35 +80,35 @@ export default function FullDataForm() {
   const handleSubmitDateChange = () => (e) => {
     setFormData((prev) => ({ ...prev, submissionDate: e.target.value }))
   }
-  const handleGitHighlightChange = (sectionIndex, itemIndex) => (e) => {
-    const newHighlights = [...formData.gitHighlight];
 
-    newHighlights[sectionIndex] = {
-      ...newHighlights[sectionIndex],
-      value: [...newHighlights[sectionIndex].value],
-    };
 
-    newHighlights[sectionIndex].value[itemIndex] = e.target.value;
-    setFormData((prev) => ({ ...prev, gitHighlight: newHighlights }));
+  const handleworkstreamOverviewChange = (e) => {
+    console.log("md: ", e); // or e.currentTarget?.value if applicable
+    setFormData((prev) => ({
+      ...prev,
+      workstreamOverview: { value: ref.current?.getMarkdown() }
+    }));
   };
-  const handleAddGitHighlightItem = (sectionIndex) => {
-    const newHighlights = [...formData.gitHighlight];
+
+
+  const handleAddworkstreamOverviewItem = (sectionIndex) => {
+    const newHighlights = [...formData.workstreamOverview];
     const updatedSection = {
       ...newHighlights[sectionIndex],
       value: [...newHighlights[sectionIndex].value, ''], // Add empty string or default value
     };
     newHighlights[sectionIndex] = updatedSection;
-    setFormData((prev) => ({ ...prev, gitHighlight: newHighlights }));
+    setFormData((prev) => ({ ...prev, workstreamOverview: newHighlights }));
   };
 
   const dispatch = useDispatch();
   const handleSubmit = () => {
     // console.log("Submitted Data:", formData);
-    alert("Form submitted! Check console for data.");
 
+    alert("Form submitted! Check console for data.");
     dispatch(submitFormData(formData))
   };
-
+  const ref = React.useRef(null)
   return (
     <Box sx={{ p: 3 }}>
       {/* Cost Section */}
@@ -192,46 +201,52 @@ export default function FullDataForm() {
       {/* Git Highlights */}
       <Card sx={{ mb: 2 }}>
         <CardContent>
-          <Typography variant="h6">Git Highlights</Typography>
-          {formData.gitHighlight.map((section, sectionIdx) => (
-            <Accordion key={sectionIdx}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{section.heading}</Typography>
-              </AccordionSummary>
-              {/*<AccordionDetails>
-                {section.value.map((item, itemIdx) => (
-                  <TextField
-                    key={itemIdx}
-                    fullWidth
-                    label={`Item ${itemIdx + 1}`}
-                    value={item.toString()}
-                    onChange={handleGitHighlightChange(sectionIdx, itemIdx)}
-                    sx={{ mb: 2 }}
-                  />
-                ))}
-              </AccordionDetails>
-*/}
-              <AccordionDetails>
-                {section.value.map((item, itemIdx) => (
-                  <TextField
-                    key={itemIdx}
-                    fullWidth
-                    label={`Item ${itemIdx + 1}`}
-                    value={item.toString()}
-                    onChange={handleGitHighlightChange(sectionIdx, itemIdx)}
-                    sx={{ mb: 2 }}
-                  />
-                ))}
-                <Button
-                  variant="outlined"
-                  onClick={() => handleAddGitHighlightItem(sectionIdx)}
-                >
-                  Add Item
-                </Button>
-              </AccordionDetails>
+          <Typography variant="h6">Workstream overview</Typography>
 
-            </Accordion>
-          ))}
+          <RealmContext.Provider>
+            <MDXEditor ref={ref}
+              markdown={formData.workstreamOverview.value}
+              // onChange={(markdown) => {
+              //   console.log("Updated markdown:", markdown);
+              // }}
+              onChange={() => {
+                const updatedMarkdown = useCellValue(markdown$)
+                // ref.current?.setMarkdown(markdown);
+                console.log("u: "+updatedMarkdown)
+                setFormData((prev) => ({
+                  ...prev,
+                  workstreamOverview: { updatedMarkdown }
+                }));
+              }}
+              // onBlur={() => {
+              //   const updated = ref.current?.getMarkdown();
+              //   console.log("Markdown on blur:", updated);
+              //   setFormData((prev) => ({
+              //     ...prev,
+              //     workstreamOverview: { value: updated }
+              //   }));
+              // }}
+
+              plugins={[headingsPlugin(), listsPlugin(), quotePlugin(), thematicBreakPlugin(),
+              toolbarPlugin({
+                toolbarContents: () => (
+                  <>
+                    <UndoRedo />
+                    <Separator />
+                    <BoldItalicUnderlineToggles />
+                    <Separator />
+                    <ListsToggle />
+                    <Separator />
+                    <CreateLink />
+
+                  </>
+                ),
+              }),
+              ]}
+            // onChange={handleworkstreamOverviewChange}
+            />
+
+          </RealmContext.Provider>
         </CardContent>
       </Card>
 

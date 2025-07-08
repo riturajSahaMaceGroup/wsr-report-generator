@@ -16,7 +16,7 @@ const Usage = () => {
     Object.keys(usage).forEach((val) => {
       const asked = Number(usage[val]["Questions Asked"]);
       const blocked = Number(usage[val]["Blocked (PII)"]);
-      console.log("Bloked PII: ",blocked)
+      // console.log("Bloked PII: ",blocked)
       const tempObj = {
         title: val == 'week_0' ? "curr.week" : val == "week_1" ? "curr.week-1" : "curr.week-2",
         asked,
@@ -26,7 +26,7 @@ const Usage = () => {
       };
       mprep.push(tempObj);
     });
-    console.log("dataPrep: ", mprep); 
+    // console.log("dataPrep: ", mprep); 
     return mprep
   }, [usage])
 

@@ -12,6 +12,8 @@ import { Provider, useSelector } from 'react-redux'
 import { store } from './applicationStore/store'
 import BottomSheetModal from './component/BottomSheetModal'
 
+import '@mdxeditor/editor/style.css';
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -118,7 +120,7 @@ function App() {
             <span style={{
               fontSize:"16px",
               fontWeight:"bold"
-            }}>Summary Highlight</span>
+            }}>Workstream overview</span>
             <GithubSummaryHighlight />
             
           </div>

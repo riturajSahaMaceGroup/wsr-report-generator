@@ -11,22 +11,22 @@ const initialState = {
             "Avg. Response Time": "1.34 min",
             "Questions Asked": 195,
             "Blocked (PII)": 14,
-            "Max Response Time":"5 min"
+            "Max Response Time": "5 min"
         },
         week_1: {
             "Avg. Response Time": "1.99 min",
             "Questions Asked": 100,
             "Blocked (PII)": 8,
-            "Max Response Time":"5 min"
+            "Max Response Time": "5 min"
         },
         week_2: {
             "Avg. Response Time": "2.58 min",
             "Questions Asked": 90,
             "Blocked (PII)": 0,
-            "Max Response Time":"5 min"
+            "Max Response Time": "5 min"
         }
     },
-    ingestion:[
+    ingestion: [
         {
             title: "Documents Ingested",
             value: 6201,
@@ -40,7 +40,7 @@ const initialState = {
             value: "~99%",
         }
     ],
-    githubSummary:{
+    githubSummary: {
         current_week: [{
             title: "Backlog",
             value: 9
@@ -83,22 +83,21 @@ const initialState = {
             }
         ]
     },
-    gitHighlight:[
-        {
-            heading: "Backlog",
-            value: ["Customizable Response Length", "Disaster Recovery Strategy for MACE"]
-        },
-        {
-            heading: "Development",
-            value: ["Secret Expire Handling", "Model Version Pinning & Upgrade Policy", "Word Add-in User Authentication", "Semantic Re-Ranking in AI Search"]
-        },
-        {
-            heading: "Ready To Deploy ",
-            value: ["KPI Dashboard Monitoring", "Pinned Python Library Versions", "Sanitization of Output Keywords"]
-        }
-    ],
-    formVisibility:false,
-    submissionDate:"Thu Jun 19 2025"
+    workstreamOverview: {
+        heading: "Workstream_overview ",
+        value: `
+            <span style={{color:'red'}}>Hello, World!</span>
+This is a **Markdown** example rendered in React.
+
+- Item 1
+- Item 2
+- Item 3
+
+[Visit React](https://reactjs.org)`
+
+    },
+    formVisibility: false,
+    submissionDate: "Thu Jun 19 2025"
 }
 
 export const formSlice = createSlice({
@@ -118,13 +117,13 @@ export const formSlice = createSlice({
         submitFormData: (state, action) => {
             return { ...state, ...action.payload };
         },
-        toggleForm: (state)=>{
-            state.formVisibility=!state.formVisibility
+        toggleForm: (state) => {
+            state.formVisibility = !state.formVisibility
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { submitFormData,toggleForm } = formSlice.actions
+export const { submitFormData, toggleForm } = formSlice.actions
 
 export default formSlice.reducer

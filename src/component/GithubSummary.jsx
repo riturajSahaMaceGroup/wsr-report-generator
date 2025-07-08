@@ -14,7 +14,8 @@ const GithubSummary = () => {
     return (
         <div style={{
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
+            flex:0.4
         }}>
             <div style={{
                 display: "flex",
@@ -41,7 +42,7 @@ const GithubSummary = () => {
                 ]}
 
                 width={500}
-                height={230}
+                height={200}
             />
 
         </div>
