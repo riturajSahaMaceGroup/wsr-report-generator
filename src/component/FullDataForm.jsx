@@ -203,30 +203,17 @@ export default function FullDataForm() {
         <CardContent>
           <Typography variant="h6">Workstream overview</Typography>
 
-          <RealmContext.Provider>
-            <MDXEditor ref={ref}
+          {/* <RealmContext.Provider> */}
+          {/* <MDXEditor ref={ref}
               markdown={formData.workstreamOverview.value}
-              // onChange={(markdown) => {
-              //   console.log("Updated markdown:", markdown);
-              // }}
-              onChange={() => {
-                const updatedMarkdown = useCellValue(markdown$)
-                // ref.current?.setMarkdown(markdown);
-                console.log("u: "+updatedMarkdown)
+              onChange={(event) => {
+               
+                console.log("u: "+ref.current?.getMarkdown())
                 setFormData((prev) => ({
                   ...prev,
-                  workstreamOverview: { updatedMarkdown }
+                  // workstreamOverview: { updatedMarkdown }
                 }));
               }}
-              // onBlur={() => {
-              //   const updated = ref.current?.getMarkdown();
-              //   console.log("Markdown on blur:", updated);
-              //   setFormData((prev) => ({
-              //     ...prev,
-              //     workstreamOverview: { value: updated }
-              //   }));
-              // }}
-
               plugins={[headingsPlugin(), listsPlugin(), quotePlugin(), thematicBreakPlugin(),
               toolbarPlugin({
                 toolbarContents: () => (
@@ -243,10 +230,30 @@ export default function FullDataForm() {
                 ),
               }),
               ]}
-            // onChange={handleworkstreamOverviewChange}
-            />
+            /> */}
 
-          </RealmContext.Provider>
+          <textarea
+            value={formData.workstreamOverview.value}
+            onChange={(event) => {
+              const updatedMarkdown = event.target.value;
+              setFormData((prev) => ({
+                ...prev,
+                workstreamOverview: { value: updatedMarkdown },
+              }));
+            }}
+            onBlur={() => {
+              const updated = formData.workstreamOverview.value;
+              console.log("Markdown on blur:", updated);
+            }}
+            rows={10}
+            cols={80}
+            style={{ width: '100%', padding: '10px', fontFamily: 'monospace' }}
+          />
+
+
+          {/* </RealmContext.Provider> */}
+
+
         </CardContent>
       </Card>
 

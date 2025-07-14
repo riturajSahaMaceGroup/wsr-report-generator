@@ -74,6 +74,8 @@ const GithubSummaryHighlight = () => {
                 textAlign: "start",
                 borderRadius: "5px",
                 flex: 1,
+                padding:"10px",
+                marginBottom:"10px"
                
             }}  >
                 <RenderMDX content={data.value} />
