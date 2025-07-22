@@ -1,3 +1,9 @@
+.mdxWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 12px;
+}
 .mdxWrapper p {
     line-height: 1.2;
     margin-bottom: 2px;
@@ -7,4 +13,27 @@
 /* Example: style every second paragraph differently */
 .mdxWrapper p:nth-child(2n) {
     background-color: #f0f0f0;
+}
+
+.mdxWrapper h3 {
+    margin-block-start: 2px;
+    margin-block-end: 2px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.mdxWrapper h1 {
+    margin-block-start: 2px;
+    margin-block-end: 2px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.mdxWrapper h2 {
+    margin-block-start: 2px;
+    margin-block-end: 2px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.mdxWrapper ul{
+    margin-block-start: 2px;
+    margin-block-end: 2px;
 }

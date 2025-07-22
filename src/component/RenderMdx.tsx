@@ -18,25 +18,26 @@ export const RenderMDX = ({ content }: { content: string }) => {
   }, [content]);
 
   if (!Component) return <p>Loading...</p>;
-  const components = {
-    p: (props: any) => (
-      <p
-        style={{
-          lineHeight: '.2',
-          marginBlockStart: '0.1em',
-          marginBlockEnd: '0.1em',
-          marginInlineStart: '0px',
-          marginInlineEnd: '0px',
-          border: '1px solid black !important' ,
-        }}
-        {...props}
-      />
-    ),
-  };
+  // const components = {
+  //   p: (props: any) => (
+  //     <p
+  //       style={{
+  //         lineHeight: '.2',
+  //         marginBlockStart: '0.1em',
+  //         marginBlockEnd: '0.1em',
+  //         marginInlineStart: '0px',
+  //         marginInlineEnd: '0px',
+  //         border: '1px solid black !important' ,
+  //       }}
+  //       {...props}
+  //     />
+  //   ),
+  // };
   
   
   return (
-    <MDXProvider components={components}>
+    <MDXProvider >
+      {/* components={components}> */}
       <div className={styles.mdxWrapper}>
       <Component />
       </div>
