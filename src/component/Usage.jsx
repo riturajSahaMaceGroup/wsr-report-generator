@@ -33,12 +33,6 @@ const Usage = () => {
 
   const ResponseTimeTable =  React.memo((props) => { {
     const { responseData } = props
-    // const mResponseData = Object.entries(responseData).map(([week, data]) => ({
-    //   week,
-    //   avgResponseTime: data["Avg. Response Time"],
-    //   maxResponseTime: data["Max Response Time"]
-    // }));
-    
     const mResponseData = Object.entries(responseData).map(([week, data]) => {
       const weekNumber = parseInt(week.split("_")[1], 10);
       const formattedWeek = weekNumber === 0 ? "curr.week" : `curr.week-${weekNumber}`;
@@ -46,9 +40,13 @@ const Usage = () => {
       return {
         week: formattedWeek,
         avgResponseTime: data["Avg. Response Time"],
-        maxResponseTime: data["Max Response Time"]
+        maxResponseTime: data["Max Response Time"],
+        questionAsked: data["Questions Asked"],
+        blockedPII: data["Blocked (PII)"],
+        resBeyond: data["Res. Beyond 3min"]
       };
     });
+    
     const cellStyle = {
       fontSize: '0.7rem', // Smaller font
       padding: '2px 5px' // Minimal padding
@@ -57,7 +55,7 @@ const Usage = () => {
     return (
       <TableContainer component={Paper}
         sx={{
-          width:"280px" , // Set a smaller width
+          width:"100%" , // Set a smaller width
           // marginLeft: 2,
           // mt: 2,
           boxShadow: 3,
@@ -73,6 +71,9 @@ const Usage = () => {
               <TableCell sx={cellStyle}><strong>Week</strong></TableCell>
               <TableCell sx={cellStyle}><strong>Avg. Time</strong></TableCell>
               <TableCell sx={cellStyle}><strong>Max Response Time</strong></TableCell>
+              <TableCell sx={cellStyle}><strong>Question Asked</strong></TableCell>
+              <TableCell sx={cellStyle}><strong>Blocked (PII)</strong></TableCell>
+              <TableCell sx={cellStyle}><strong>Res. beyond 3 min</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -81,6 +82,9 @@ const Usage = () => {
                 <TableCell sx={cellStyle}>{row.week}</TableCell>
                 <TableCell sx={cellStyle}>{row.avgResponseTime}</TableCell>
                 <TableCell sx={cellStyle}>{row.maxResponseTime}</TableCell>
+                <TableCell sx={cellStyle}>{row.questionAsked}</TableCell>
+                <TableCell sx={cellStyle}>{row.blockedPII}</TableCell>
+                <TableCell sx={cellStyle}>{row.resBeyond}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -110,7 +114,7 @@ const Usage = () => {
           flexDirection: "row",
           flex: .5,
         }}>
-          <div style={{
+          {/* <div style={{
             display: "flex",
             flexDirection: "column",
             flex: .5,
@@ -133,11 +137,11 @@ const Usage = () => {
 
 
           </div>
-          <Divider sx={{ background: "#ed816680", height: "90%" }} orientation='vertical' />
+          <Divider sx={{ background: "#ed816680", height: "90%" }} orientation='vertical' /> */}
           <div style={{
             display: "flex",
             flexDirection: "column",
-            flex: .49,
+            flex: 1,
             alignItems: "center",
             fontSize: "14px",
             justifyContent: "center",
@@ -156,6 +160,7 @@ const Usage = () => {
           flex: .5,
           // flexDirection: "column"
           width: "100%",
+         
         }}>
           <div style={{
             display: "flex",

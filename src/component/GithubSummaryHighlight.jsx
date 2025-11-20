@@ -31,56 +31,21 @@ const GithubSummaryHighlight = () => {
     // [Visit React](https://reactjs.org)
     // `;
     return (
-        <div style={{
-            display: "flex",
-            gap: "5px",
-            paddingTop: "13px",
-            paddingLeft: "5px",
-            paddingRight: "5px",
-            flex: 0.6
-        }}>
-            {/* {data.map((item, idx) => {
-                return <div key={idx} style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    boxShadow: "0 0 12px #cce4f0", 
-                    textAlign: "start",
-                    borderRadius: "5px",
-                    flex:1
-
-                }}  >
-                    <span style={{ fontWeight: "bold", paddingLeft: "5px" }}>{item.heading}</span>
-
-                    <ul>
-                        {
-                            item.value.map((mitem, midx) => {
-                                return <li key={midx} style={{ fontSize: "12px",color:"black",fontWeight:"400",fontFamily:"sans-serif",textAlign:"start",padding:"2px" }}>{mitem}</li>
-                            })
-                        }
-                    </ul>
-                    <div style={{
-                        fontSize:"16px",
-                    }}>
-
-                   
-
-                    </div>
-                </div>
-            })} */}
-            <div style={{
+         <div style={{
                 display: "flex",
                 flexDirection: "column",
-                boxShadow: "0 0 12px #cce4f0",
+                boxShadow: "0 0 18px #fcc8a6ff",
                 textAlign: "start",
                 borderRadius: "5px",
                 flex: 1,
-                padding:"10px",
-                marginBottom:"10px"
-               
+                paddingLeft:"10px",
+                paddingright:"10px",
+                margin:"10px"
+                
             }}  >
                 <RenderMDX content={data.value} />
             </div>
-        </div>
+       
     )
 }
 

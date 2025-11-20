@@ -5,6 +5,7 @@ import TableContent from './TableContent';
 import { useSelector } from 'react-redux';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import useGetRagStatus from '../hooks/useGetRagStatus';
+import { DateRender } from '../App';
 export const Note = (props) => {
     const { title, value } = props
     return <div style={{
@@ -80,7 +81,7 @@ const CostAnalysis = () => {
                         return <TableContent title={item.title} value={item.value} key={idx} />
                     })
                 }
-                <Note title={"PTU"} value={"Provisioned throughput units"} />
+                {/* <Note title={"PTU"} value={"Provisioned throughput units"} /> */}
             </div>
             <Divider orientation='vertical' sx={{ background: "#ed816680" }} />
             <div style={{
@@ -97,12 +98,11 @@ const CostAnalysis = () => {
                         },
                     ]}
                     width={100}
-                    height={100}
+                    height={60}
                 />
             </div>
 
             <RAG_STATUS status={useGetRagStatus("cost")} />
-
         </div>
     )
 }

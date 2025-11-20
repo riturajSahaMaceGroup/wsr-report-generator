@@ -43,7 +43,7 @@ const Injetion = () => {
                         },
                     ]}
                     width={90}
-                    height={90}
+                    height={70}
                 />
                 {/* <Gauge
                     value={75}

@@ -17,7 +17,7 @@ export default function BottomSheetModal() {
 
   return (
     <div>
-      <Button variant="contained" onClick={toggleDrawer(true)} sx={{ marginTop: "30px" }}>
+      <Button variant="contained" onClick={toggleDrawer(true)} sx={{ marginTop: "10px" }}>
         Edit data
       </Button>
       <Drawer
