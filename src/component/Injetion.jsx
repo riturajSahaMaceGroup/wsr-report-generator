@@ -6,9 +6,9 @@ import { Note, RAG_STATUS } from './CostAnalysis'
 import { useSelector } from 'react-redux'
 import useGetRagStatus from '../hooks/useGetRagStatus'
 
-const Injetion = () => {
+const Injetion = ({type}) => {
 
-    const data = useSelector((state) => state.mForm.ingestion)
+    const data = type=='construct'? useSelector((state) => state.mForm.ingestion):useSelector((state) => state.mForm.ingestion_consult)
     return (
         <div style={{
             display: "flex",

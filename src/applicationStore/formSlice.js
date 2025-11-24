@@ -20,14 +20,14 @@ const initialState = {
                 "Questions Asked": 100,
                 "Blocked (PII)": 8,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 5
+                "Res. Beyond 3min": 6
             },
             week_2: {
                 "Avg. Response Time": "2.58 min",
                 "Questions Asked": 90,
                 "Blocked (PII)": 0,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 5
+                "Res. Beyond 3min": 7
             }
         },
         consult: {
@@ -36,26 +36,40 @@ const initialState = {
                 "Questions Asked": 195,
                 "Blocked (PII)": 14,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 5
+                "Res. Beyond 3min": 8
             },
             week_1: {
                 "Avg. Response Time": "1.99 min",
                 "Questions Asked": 100,
                 "Blocked (PII)": 8,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 5
+                "Res. Beyond 3min": 9
             },
             week_2: {
                 "Avg. Response Time": "2.58 min",
                 "Questions Asked": 90,
                 "Blocked (PII)": 0,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 5
+                "Res. Beyond 3min": 10
             }
         }
 
     },
     ingestion: [
+        {
+            title: "Documents Ingested",
+            value: 6201,
+        },
+        {
+            title: "Failed Ingestions",
+            value: 90,
+        },
+        {
+            title: "Success Rate",
+            value: "~99%",
+        }
+    ],
+    ingestion_consult: [
         {
             title: "Documents Ingested",
             value: 6201,

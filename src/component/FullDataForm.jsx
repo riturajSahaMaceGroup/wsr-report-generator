@@ -14,13 +14,15 @@ import {
   markdown$,
   RealmContext
 } from '@mdxeditor/editor'
+import { CONSTRUCT, CONSULT } from '../assets/Constants';
 
 
 
 export default function FullDataForm() {
   const initialData = useSelector((state) => state.mForm)
   const [formData, setFormData] = useState(initialData);
-
+  const showView = useSelector((state) => state.viewController.show)
+  
   React.useEffect(() => {
     setFormData(initialData);
   }, [initialData]);
@@ -33,19 +35,55 @@ export default function FullDataForm() {
     }));
   };
 
-  const handleUsageChange = (week, key) => (e) => {
+  const handleUsageChangeConstruct = (week, key) => (e) => {
     setFormData((prev) => ({
       ...prev,
       usage: {
         ...prev.usage,
+        construct:{
+          ...prev.usage.construct,
         [week]: {
-          ...prev.usage[week],
+          ...prev.usage.construct[week],
           [key]: e.target.value
         }
+        } 
       }
     }));
   };
+const handleUsageChangeConsult = (week, key) => (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      usage: {
+        ...prev.usage,
+        consult:{
+          ...prev.usage.consult,
+        [week]: {
+          ...prev.usage.consult[week],
+          [key]: e.target.value
+        }
+        } 
+      }
+    }));
+  };
+  const handleIngestionChangeConsult = (index) => (e) => {
+    const newIngestion = [...formData.ingestion_consult];
+    newIngestion[index] = { ...newIngestion[index], value: e.target.value };
+    // calculate the success %
 
+    const ingested = Number(newIngestion[0].value);
+    const failed = Number(newIngestion[1].value);
+
+    const successRate = ingested
+      ? `~${(((ingested - failed) / ingested) * 100).toFixed(2)}%`
+      : "~0%";
+
+    newIngestion[2] = {
+      ...newIngestion[2],
+      value: successRate
+    };
+
+    setFormData((prev) => ({ ...prev, ingestion_consult: newIngestion }));
+  };
   const handleIngestionChange = (index) => (e) => {
     const newIngestion = [...formData.ingestion];
     newIngestion[index] = { ...newIngestion[index], value: e.target.value };
@@ -132,7 +170,7 @@ export default function FullDataForm() {
 
       {/* Usage Section */}
       <Card sx={{ mb: 2 }}>
-        <CardContent>
+        {showView == CONSTRUCT&&<CardContent>
           <Typography variant="h6">Usage-Construct (Weekly)</Typography>
           {Object.entries(formData.usage.construct).map(([week, stats]) => (
             <Box key={week} sx={{ mb: 2 }}>
@@ -144,7 +182,7 @@ export default function FullDataForm() {
                       fullWidth
                       label={label}
                       value={value}
-                      onChange={handleUsageChange(week, label)}
+                      onChange={handleUsageChangeConstruct(week, label)}
                     />
                   </Grid>
                 ))}
@@ -152,8 +190,8 @@ export default function FullDataForm() {
             </Box>
           ))}
             
-        </CardContent>
-         <CardContent>
+        </CardContent>}
+         {showView == CONSULT&&<CardContent>
           <Typography variant="h6">Usage-Consult (Weekly)</Typography>
             {Object.entries(formData.usage.consult).map(([week, stats]) => (
             <Box key={week} sx={{ mb: 2 }}>
@@ -165,20 +203,20 @@ export default function FullDataForm() {
                       fullWidth
                       label={label}
                       value={value}
-                      onChange={handleUsageChange(week, label)}
+                      onChange={handleUsageChangeConsult(week, label)}
                     />
                   </Grid>
                 ))}
               </Grid>
             </Box>
           ))}
-        </CardContent>
+        </CardContent>}
       </Card>
 
       {/* Ingestion Section */}
-      <Card sx={{ mb: 2 }}>
+      {showView == CONSTRUCT&&<Card sx={{ mb: 2 }}>
         <CardContent>
-          <Typography variant="h6">Ingestion Metrics</Typography>
+          <Typography variant="h6">Ingestion Metrics Construct</Typography>
           <Grid container spacing={2}>
             {formData.ingestion.map((item, idx) => (
               <Grid item xs={4} key={idx}>
@@ -193,66 +231,33 @@ export default function FullDataForm() {
             ))}
           </Grid>
         </CardContent>
-      </Card>
-
-      {/* GitHub Summary */}
-      {/* <Card sx={{ mb: 2 }}>
+      </Card>}
+      
+      {showView == CONSULT&&<Card sx={{ mb: 2 }}>
         <CardContent>
-          <Typography variant="h6">GitHub Summary</Typography>
-          {Object.entries(formData.githubSummary).map(([week, items]) => (
-            <Box key={week} sx={{ mb: 2 }}>
-              <Typography variant="subtitle1">{week.replace(/_/g, ' ').toUpperCase()}</Typography>
-              <Grid container spacing={2}>
-                {items.map((item, idx) => (
-                  <Grid item xs={4} key={idx}>
-                    <TextField
-                      fullWidth
-                      label={item.title}
-                      value={item.value + ""}
-                      onChange={handleGithubSummaryChange(week, idx)}
-                    />
-                  </Grid>
-                ))}
+          <Typography variant="h6">Ingestion Metrics Consult</Typography>
+          <Grid container spacing={2}>
+            {formData.ingestion_consult.map((item, idx) => (
+              <Grid item xs={4} key={idx}>
+                <TextField
+                  fullWidth
+                  label={item.title}
+                  value={item.value.toString()}
+                  onChange={handleIngestionChangeConsult(idx)}
+                  disabled={idx == 2 ? true : false}
+                />
               </Grid>
-            </Box>
-          ))}
+            ))}
+          </Grid>
         </CardContent>
-      </Card> */}
+      </Card>}
+
+      
 
       {/* Git Highlights */}
       <Card sx={{ mb: 2 }}>
         <CardContent>
           <Typography variant="h6">Workstream overview</Typography>
-
-          {/* <RealmContext.Provider> */}
-          {/* <MDXEditor ref={ref}
-              markdown={formData.workstreamOverview.value}
-              onChange={(event) => {
-               
-                console.log("u: "+ref.current?.getMarkdown())
-                setFormData((prev) => ({
-                  ...prev,
-                  // workstreamOverview: { updatedMarkdown }
-                }));
-              }}
-              plugins={[headingsPlugin(), listsPlugin(), quotePlugin(), thematicBreakPlugin(),
-              toolbarPlugin({
-                toolbarContents: () => (
-                  <>
-                    <UndoRedo />
-                    <Separator />
-                    <BoldItalicUnderlineToggles />
-                    <Separator />
-                    <ListsToggle />
-                    <Separator />
-                    <CreateLink />
-
-                  </>
-                ),
-              }),
-              ]}
-            /> */}
-
           <textarea
             value={formData.workstreamOverviewLeft.value}
             onChange={(event) => {

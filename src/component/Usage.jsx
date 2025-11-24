@@ -7,10 +7,11 @@ import { RAG_STATUS } from './CostAnalysis'
 import useGetRagStatus from '../hooks/useGetRagStatus'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 
-const Usage = (type) => {
+const Usage = ({type}) => {
 
-  const usage = type=="construct"?useSelector((state) => state.mForm.usage.construct):useSelector((state) => state.mForm.usage.construct)
-
+  const usage = type == "construct"?useSelector((state) => state.mForm.usage.construct):useSelector((state) => state.mForm.usage.consult)
+  console.log(`usage: ${JSON.stringify(usage)} type: ${JSON.stringify(type)}`)
+ 
   const dataPrep = React.useMemo(() => {
     let mprep = [];
     Object.keys(usage).forEach((val) => {
@@ -33,6 +34,7 @@ const Usage = (type) => {
 
   const ResponseTimeTable =  React.memo((props) => { {
     const { responseData } = props
+    console.log("responsedat: ",responseData)
     const mResponseData = Object.entries(responseData).map(([week, data]) => {
       const weekNumber = parseInt(week.split("_")[1], 10);
       const formattedWeek = weekNumber === 0 ? "curr.week" : `curr.week-${weekNumber}`;
@@ -114,30 +116,7 @@ const Usage = (type) => {
           flexDirection: "row",
           flex: .5,
         }}>
-          {/* <div style={{
-            display: "flex",
-            flexDirection: "column",
-            flex: .5,
-            alignItems: "start",
-            fontSize: "14px",
-            justifyContent: "start",
-            width: "100%",
-          }}>
-            {Object.keys(usage.week_0).map((value, idx) => {
-              return value !== "Max Response Time" && (value == "Blocked (PII)" ?
-                <TableContent
-                  title={value}
-                  value={`${usage.week_0[value]} 
-          (${(usage.week_0[value] / usage.week_0["Questions Asked"] * 100).toFixed(2)}%)`}
-                  key={idx}></TableContent> :
-                <TableContent title={value} value={usage.week_0[value]} key={idx}>
 
-                </TableContent>)
-            })}
-
-
-          </div>
-          <Divider sx={{ background: "#ed816680", height: "90%" }} orientation='vertical' /> */}
           <div style={{
             display: "flex",
             flexDirection: "column",

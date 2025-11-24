@@ -19,13 +19,13 @@ function App() {
 
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
 
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentDateTime(new Date());
-    }, 1000); // updates every second
+  // React.useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCurrentDateTime(new Date());
+  //   }, 1000); // updates every second
 
-    return () => clearInterval(timer); // cleanup on unmount
-  }, []);
+  //   return () => clearInterval(timer); // cleanup on unmount
+  // }, []);
 
   return (
     <Provider store={store}>
@@ -100,7 +100,7 @@ function App() {
                 borderColor: "black"
               }
             }}>Data Ingestion</Divider>
-            <Injetion />
+            <Injetion type ={val==1?"construct":"consult"}/>
                 </div>
               </div>
 
@@ -140,89 +140,3 @@ export const DateRender = () => {
 export default App
 
 
-{/* <div style={{
-          display: "flex",
-          height: "99%",
-          width: "100%",
-          border: "1px solid black",
-          // flex: 1
-        }}>
-          <div style={{
-            display: "flex",
-            flexDirection: "column",
-            paddingLeft: "10px",
-            flex: .57
-          }}>
-            <span style={{
-              boxShadow: "0 0 12px rgb(218, 153, 191)",
-              color: "white",
-              padding: "5px",
-              margin: "1px",
-              fontWeight: "bold",
-              borderRadius: "10px",
-              fontSize: "12px",
-              background: "linear-gradient(90deg,rgba(222, 82, 117, 1) 0%, rgba(199, 87, 149, 1) 45%, rgba(104, 83, 237, 1) 100%)"
-            }}>Application Performance</span>
-            <Divider sx={{
-              fontSize: "12px", fontWeight: "bold",
-              '&::before, &::after': {
-                borderTopWidth: '2px',
-                borderColor: "black"
-              }
-            }}>Cost Management</Divider>
-            <CostAnalysis />
-            <Divider sx={{
-              fontSize: "12px", fontWeight: "bold",
-              '&::before, &::after': {
-                borderTopWidth: '2px',
-                borderColor: "black"
-              }
-            }}>Usage</Divider>
-
-            <Usage />
-
-
-            <Divider sx={{
-              fontSize: "12px", fontWeight: "bold",
-              '&::before, &::after': {
-                borderTopWidth: '2px',
-                borderColor: "black"
-              }
-            }}>Data Ingestion</Divider>
-            <Injetion />
-          </div>
-          <Divider orientation='vertical' sx={{
-            borderWidth: "2px",
-            marginLeft: "10px",
-            background: "rgba(136, 142, 224, 0.29)",
-            boxShadow: "0 0 12px rgb(218, 153, 191)",
-            // height:"97.5vh"
-          }}></Divider>
-          <div style={{
-            display: "flex",
-            flexDirection: "column",
-            paddingLeft: "10px",
-            flex: .43
-          }}>
-            <span style={{
-              boxShadow: "0 0 12px rgb(218, 153, 191)",
-              color: "white",
-              padding: "5px",
-              margin: "1px",
-              fontWeight: "bold",
-              borderRadius: "10px",
-              fontSize: "12px",
-              background: "linear-gradient(90deg,rgba(222, 82, 117, 1) 0%, rgba(199, 87, 149, 1) 45%, rgba(104, 83, 237, 1) 100%)"
-            }}  >Application Development</span>
-            <GithubSummary />
-            
-
-           
-            <span style={{
-              fontSize:"16px",
-              fontWeight:"bold"
-            }}>Workstream overview</span>
-            <GithubSummaryHighlight />
-            
-          </div>
-        </div> */}
