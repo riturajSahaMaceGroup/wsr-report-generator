@@ -133,8 +133,29 @@ export default function FullDataForm() {
       {/* Usage Section */}
       <Card sx={{ mb: 2 }}>
         <CardContent>
-          <Typography variant="h6">Usage (Weekly)</Typography>
-          {Object.entries(formData.usage).map(([week, stats]) => (
+          <Typography variant="h6">Usage-Construct (Weekly)</Typography>
+          {Object.entries(formData.usage.construct).map(([week, stats]) => (
+            <Box key={week} sx={{ mb: 2 }}>
+              <Typography variant="subtitle1">{week.replace('_', ' ').toUpperCase()}</Typography>
+              <Grid container spacing={2}>
+                {Object.entries(stats).map(([label, value]) => (
+                  <Grid item xs={4} key={label}>
+                    <TextField
+                      fullWidth
+                      label={label}
+                      value={value}
+                      onChange={handleUsageChange(week, label)}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          ))}
+            
+        </CardContent>
+         <CardContent>
+          <Typography variant="h6">Usage-Consult (Weekly)</Typography>
+            {Object.entries(formData.usage.consult).map(([week, stats]) => (
             <Box key={week} sx={{ mb: 2 }}>
               <Typography variant="subtitle1">{week.replace('_', ' ').toUpperCase()}</Typography>
               <Grid container spacing={2}>
@@ -175,7 +196,7 @@ export default function FullDataForm() {
       </Card>
 
       {/* GitHub Summary */}
-      <Card sx={{ mb: 2 }}>
+      {/* <Card sx={{ mb: 2 }}>
         <CardContent>
           <Typography variant="h6">GitHub Summary</Typography>
           {Object.entries(formData.githubSummary).map(([week, items]) => (
@@ -196,7 +217,7 @@ export default function FullDataForm() {
             </Box>
           ))}
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Git Highlights */}
       <Card sx={{ mb: 2 }}>
@@ -233,12 +254,29 @@ export default function FullDataForm() {
             /> */}
 
           <textarea
-            value={formData.workstreamOverview.value}
+            value={formData.workstreamOverviewLeft.value}
             onChange={(event) => {
               const updatedMarkdown = event.target.value;
               setFormData((prev) => ({
                 ...prev,
-                workstreamOverview: { value: updatedMarkdown },
+                workstreamOverviewLeft: { value: updatedMarkdown },
+              }));
+            }}
+            onBlur={() => {
+              const updated = formData.workstreamOverviewLeft.value;
+              console.log("Markdown on blur:", updated);
+            }}
+            rows={10}
+            cols={80}
+            style={{ width: '100%', padding: '10px', fontFamily: 'monospace' }}
+          />
+          <textarea
+            value={formData.workstreamOverviewRight.value}
+            onChange={(event) => {
+              const updatedMarkdown = event.target.value;
+              setFormData((prev) => ({
+                ...prev,
+                workstreamOverviewRight: { value: updatedMarkdown },
               }));
             }}
             onBlur={() => {
@@ -249,7 +287,6 @@ export default function FullDataForm() {
             cols={80}
             style={{ width: '100%', padding: '10px', fontFamily: 'monospace' }}
           />
-
 
           {/* </RealmContext.Provider> */}
 

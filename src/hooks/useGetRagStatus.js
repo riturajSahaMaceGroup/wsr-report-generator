@@ -11,7 +11,8 @@ const useGetRagStatus = (statusOf) => {
     const value = useSelector((state)=> state.mForm)
     const metrics = {
         cost: value.cost,
-        usage: value.usage.week_0["Avg. Response Time"].split(" ")[0],
+        usage_construct: value.usage.construct.week_0["Avg. Response Time"].split(" ")[0],
+        usage_consult: value.usage.consult.week_0["Avg. Response Time"].split(" ")[0],
         dataIngestion: parseFloat(value.ingestion[2].value.match(/[\d.]+/)[0]),
     };
 
@@ -27,11 +28,14 @@ const useGetRagStatus = (statusOf) => {
                
                 return  mCal <= 70 ? "G" : mCal > 70 && mCal <= 85 ? "A" : "R";
 
-            case 'usage':
+            case 'usage_construct':
                 if (value > 3) return 'R';
                 if (value > 2) return 'A';
                 return 'G';
-
+            case 'usage_consult':
+                if (value > 3) return 'R';
+                if (value > 2) return 'A';
+                return 'G';
             case 'dataIngestion':
                 if (value <= 97) return 'R';
                 if (value < 99) return 'A';

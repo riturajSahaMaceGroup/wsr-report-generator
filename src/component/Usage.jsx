@@ -7,9 +7,9 @@ import { RAG_STATUS } from './CostAnalysis'
 import useGetRagStatus from '../hooks/useGetRagStatus'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 
-const Usage = () => {
+const Usage = (type) => {
 
-  const usage = useSelector((state) => state.mForm.usage)
+  const usage = type=="construct"?useSelector((state) => state.mForm.usage.construct):useSelector((state) => state.mForm.usage.construct)
 
   const dataPrep = React.useMemo(() => {
     let mprep = [];
@@ -212,7 +212,7 @@ const Usage = () => {
                     color: '#e9a7de',
                   }
                 ]}
-                height={150}
+                height={120}
                
                 margin={{ left: 0, right: 50, top: 20, bottom: 30 }}
 
@@ -227,7 +227,7 @@ const Usage = () => {
 
         </div>
       </div>
-      <RAG_STATUS status={useGetRagStatus("usage")} />
+      <RAG_STATUS status={useGetRagStatus(`${type=='construct'?'usage_construct':'usage_consult'}`)} />
 
     </div>
   )

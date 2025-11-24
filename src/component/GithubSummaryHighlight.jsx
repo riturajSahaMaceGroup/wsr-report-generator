@@ -19,7 +19,8 @@ const GithubSummaryHighlight = () => {
     //         value: ["KPI Dashboard Monitoring", "Pinned Python Library Versions", "Sanitization of Output Keywords"]
     //     }
     // ])
-    const data = useSelector((state) => state.mForm.workstreamOverview)
+    const dataLeft = useSelector((state) => state.mForm.workstreamOverviewLeft)
+     const dataRight = useSelector((state) => state.mForm.workstreamOverviewRight)
     //     const markdownContent = `
     // ### Hello, World!
     // This is a **Markdown** example rendered in React.
@@ -33,7 +34,7 @@ const GithubSummaryHighlight = () => {
     return (
          <div style={{
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "row",
                 boxShadow: "0 0 18px #fcc8a6ff",
                 textAlign: "start",
                 borderRadius: "5px",
@@ -43,7 +44,23 @@ const GithubSummaryHighlight = () => {
                 margin:"10px"
                 
             }}  >
-                <RenderMDX content={data.value} />
+                <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "50%",
+                    
+                }}>
+                    <RenderMDX content={dataLeft.value} />
+                </div>
+                <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                     width: "50%",
+                     
+                    
+                }}>
+                    <RenderMDX content={dataRight.value} />
+                </div>
             </div>
        
     )

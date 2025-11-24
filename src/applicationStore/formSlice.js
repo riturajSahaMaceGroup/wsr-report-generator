@@ -7,27 +7,53 @@ const initialState = {
         PTU_Alert_Last_triggered: "14th May 2025"
     },
     usage: {
-        week_0: {
-            "Avg. Response Time": "1.34 min",
-            "Questions Asked": 195,
-            "Blocked (PII)": 14,
-            "Max Response Time": "5 min",
-            "Res. Beyond 3min":5
+        construct: {
+            week_0: {
+                "Avg. Response Time": "1.34 min",
+                "Questions Asked": 195,
+                "Blocked (PII)": 14,
+                "Max Response Time": "5 min",
+                "Res. Beyond 3min": 5
+            },
+            week_1: {
+                "Avg. Response Time": "1.99 min",
+                "Questions Asked": 100,
+                "Blocked (PII)": 8,
+                "Max Response Time": "5 min",
+                "Res. Beyond 3min": 5
+            },
+            week_2: {
+                "Avg. Response Time": "2.58 min",
+                "Questions Asked": 90,
+                "Blocked (PII)": 0,
+                "Max Response Time": "5 min",
+                "Res. Beyond 3min": 5
+            }
         },
-        week_1: {
-            "Avg. Response Time": "1.99 min",
-            "Questions Asked": 100,
-            "Blocked (PII)": 8,
-            "Max Response Time": "5 min",
-            "Res. Beyond 3min":5
-        },
-        week_2: {
-            "Avg. Response Time": "2.58 min",
-            "Questions Asked": 90,
-            "Blocked (PII)": 0,
-            "Max Response Time": "5 min",
-            "Res. Beyond 3min":5
+        consult: {
+            week_0: {
+                "Avg. Response Time": "1.34 min",
+                "Questions Asked": 195,
+                "Blocked (PII)": 14,
+                "Max Response Time": "5 min",
+                "Res. Beyond 3min": 5
+            },
+            week_1: {
+                "Avg. Response Time": "1.99 min",
+                "Questions Asked": 100,
+                "Blocked (PII)": 8,
+                "Max Response Time": "5 min",
+                "Res. Beyond 3min": 5
+            },
+            week_2: {
+                "Avg. Response Time": "2.58 min",
+                "Questions Asked": 90,
+                "Blocked (PII)": 0,
+                "Max Response Time": "5 min",
+                "Res. Beyond 3min": 5
+            }
         }
+
     },
     ingestion: [
         {
@@ -86,19 +112,13 @@ const initialState = {
             }
         ]
     },
-    workstreamOverview: {
+    workstreamOverviewLeft: {
         heading: "Workstream_overview ",
-        value: `
-            <span style={{color:'red'}}>Hello, World!</span>
-This is a **Markdown** example rendered in React.
-
-- Item 1
-- Item 2
-- Item 3
-- Item 1
-- Item 3
-
-[Visit React](https://reactjs.org)`
+        value: `### Workstream Overview`
+    },
+    workstreamOverviewRight: {
+        heading: "Workstream_overview ",
+        value: `### Workstream Overview`
     },
     formVisibility: false,
     submissionDate: "Thu Jun 19 2025"

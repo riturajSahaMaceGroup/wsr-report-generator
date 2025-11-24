@@ -90,7 +90,7 @@ function App() {
                     }
                   }}>Usage</Divider>
 
-                  <Usage />
+                  <Usage type ={val==1?"construct":"consult"}/>
 
 
                   <Divider sx={{
@@ -110,10 +110,10 @@ function App() {
          <div style={{display: "flex",
             flexDirection:"column",
             width:"100%",
-            borderTop:"1px solid black",
+           
             }}>
              <span style={{
-              fontSize:"16px",
+              fontSize:"14px",
               fontWeight:"bold"
             }}>Workstream overview</span>
             <GithubSummaryHighlight />

@@ -1,2 +1,2 @@
-export const WSR_VIEW ="wsr-view";
-export const WSR_BUSSINESS_VIEW ="wsr-bussiness-view"
+export const CONSTRUCT ="Construct";
+export const CONSULT ="Consult"

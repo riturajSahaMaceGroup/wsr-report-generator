@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { WSR_BUSSINESS_VIEW, WSR_VIEW } from '../assets/Constants'
+import { CONSULT, CONSTRUCT } from '../assets/Constants'
 
 const initialState = {
-    show: WSR_VIEW
+    show: CONSTRUCT
 }
 
 export const viewControllerSlice = createSlice({
@@ -10,7 +10,7 @@ export const viewControllerSlice = createSlice({
     initialState,
     reducers: {
         toggleView:(state)=>{
-            state.show = state.show == WSR_VIEW? WSR_BUSSINESS_VIEW:WSR_VIEW
+            state.show = state.show == CONSTRUCT? CONSULT:CONSTRUCT
         }
     }
 })

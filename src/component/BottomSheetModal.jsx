@@ -3,7 +3,7 @@ import { Drawer, Button, Box, Typography, FormControlLabel, Switch } from '@mui/
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleForm } from '../applicationStore/formSlice';
 import FullDataForm from './FullDataForm';
-import { WSR_VIEW } from '../assets/Constants';
+import { CONSTRUCT } from '../assets/Constants';
 import { toggleView } from '../applicationStore/viewControllerSlice';
 
 export default function BottomSheetModal() {
