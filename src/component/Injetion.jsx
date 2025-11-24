@@ -38,7 +38,7 @@ const Injetion = ({type}) => {
                         {
                             data: [
                                 { id: 0, value: data[0].value - data[1].value, label: 'Success', color: "#b5b0b3" },
-                                { id: 1, value: data[1].value, label: 'failure', color: "#6c645f" },
+                                { id: 1, value: data[1].value, label: 'Failure', color: "#6c645f" },
                             ],
                         },
                     ]}
@@ -56,7 +56,7 @@ const Injetion = ({type}) => {
                     height={100}
                 /> */}
             </div>
-            <RAG_STATUS status={useGetRagStatus("dataIngestion")} />
+            <RAG_STATUS status={useGetRagStatus(`${type=="construct"? "dataIngestion":"dataIngestion_consult"}`)} />
         </div>
     )
 }

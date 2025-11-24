@@ -14,6 +14,7 @@ const useGetRagStatus = (statusOf) => {
         usage_construct: value.usage.construct.week_0["Avg. Response Time"].split(" ")[0],
         usage_consult: value.usage.consult.week_0["Avg. Response Time"].split(" ")[0],
         dataIngestion: parseFloat(value.ingestion[2].value.match(/[\d.]+/)[0]),
+        dataIngestion_consult: parseFloat(value.ingestion_consult[2].value.match(/[\d.]+/)[0]),
     };
 
     return useMemo(() => {
@@ -37,6 +38,10 @@ const useGetRagStatus = (statusOf) => {
                 if (value > 2) return 'A';
                 return 'G';
             case 'dataIngestion':
+                if (value <= 97) return 'R';
+                if (value < 99) return 'A';
+                return 'G';
+            case 'dataIngestion_consult':
                 if (value <= 97) return 'R';
                 if (value < 99) return 'A';
                 return 'G';
