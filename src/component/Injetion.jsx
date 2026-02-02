@@ -9,6 +9,7 @@ import useGetRagStatus from '../hooks/useGetRagStatus'
 const Injetion = ({type}) => {
 
     const data = type=='construct'? useSelector((state) => state.mForm.ingestion):useSelector((state) => state.mForm.ingestion_consult)
+    const previousValue = data.find(item => item.title === "previousValue")?.value || 0;
     return (
         <div style={{
             display: "flex",
@@ -23,7 +24,9 @@ const Injetion = ({type}) => {
                 fontSize: "14px"
             }}>
                 {data.map((item, idx) => {
-                    return <TableContent title={item.title} value={item.value} key={idx} />
+                    return idx == 0?<div style={{display: "flex"}}><TableContent title={item.title} value={item.value} key={idx} /> {
+                       <span style={{color: item.value - previousValue > 0 ? "green" : "red",fontWeight:"bold"}}>{` ${item.value - previousValue > 0 ? "↑" : "↓"}(${item.value - previousValue})`}</span>
+                    }  </div>:<TableContent title={item.title} value={item.value} key={idx} />
                 })}
 
             </div>
@@ -33,7 +36,6 @@ const Injetion = ({type}) => {
                 flex: .5,
             }}>
                 <PieChart
-
                     series={[
                         {
                             data: [

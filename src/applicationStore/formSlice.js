@@ -60,6 +60,7 @@ const initialState = {
             title: "Documents Ingested",
             value: 6201,
         },
+        
         {
             title: "Failed Ingestions",
             value: 90,
@@ -67,7 +68,11 @@ const initialState = {
         {
             title: "Success Rate",
             value: "~99%",
-        }
+        },
+        {
+            title: "previousValue",
+            value: 6000,
+        },
     ],
     ingestion_consult: [
         {
@@ -81,7 +86,11 @@ const initialState = {
         {
             title: "Success Rate",
             value: "~99%",
-        }
+        },
+         {
+            title: "previousValue",
+            value: 6000,
+        },
     ],
     githubSummary: {
         current_week: [{
