@@ -13,8 +13,8 @@ const useGetRagStatus = (statusOf) => {
         cost: value.cost,
         usage_construct: value.usage.construct.week_0["Avg. Response Time"].split(" ")[0],
         usage_consult: value.usage.consult.week_0["Avg. Response Time"].split(" ")[0],
-        dataIngestion: parseFloat(value.ingestion[2].value.match(/[\d.]+/)[0]),
-        dataIngestion_consult: parseFloat(value.ingestion_consult[2].value.match(/[\d.]+/)[0]),
+        dataIngestion: parseFloat(value.ingestion[4].value.match(/[\d.]+/)[0]),
+        dataIngestion_consult: parseFloat(value.ingestion_consult[4].value.match(/[\d.]+/)[0]),
     };
 
     return useMemo(() => {

@@ -24,9 +24,7 @@ const Injetion = ({type}) => {
                 fontSize: "14px"
             }}>
                 {data.map((item, idx) => {
-                    return idx == 0?<div style={{display: "flex"}}><TableContent title={item.title} value={item.value} key={idx} /> {
-                       <span style={{color: item.value - previousValue > 0 ? "green" : "red",fontWeight:"bold"}}>{` ${item.value - previousValue > 0 ? "↑" : "↓"}(${item.value - previousValue})`}</span>
-                    }  </div>:<TableContent title={item.title} value={item.value} key={idx} />
+                    return idx<3?<TableContent title={item.title} value={item.value} key={idx} />:null
                 })}
 
             </div>
@@ -34,8 +32,14 @@ const Injetion = ({type}) => {
             <div style={{
                 display: "flex",
                 flex: .5,
+                flexDirection: "column",
+                alignItems: "start",
+                fontSize: "14px"
             }}>
-                <PieChart
+                {data.map((item, idx) => {
+                    return idx>=3?<TableContent title={item.title} value={item.value} key={idx} />:null
+                })}
+                {/* <PieChart
                     series={[
                         {
                             data: [
@@ -46,7 +50,7 @@ const Injetion = ({type}) => {
                     ]}
                     width={90}
                     height={70}
-                />
+                /> */}
                 {/* <Gauge
                     value={75}
                     startAngle={0}

@@ -87,19 +87,19 @@ const handleUsageChangeConsult = (week, key) => (e) => {
   const handleIngestionChange = (index) => (e) => {
     const newIngestion = [...formData.ingestion];
     newIngestion[index] = { ...newIngestion[index], value: e.target.value };
-    // calculate the success %
+    // // calculate the success %
 
-    const ingested = Number(newIngestion[0].value);
-    const failed = Number(newIngestion[1].value);
+    // const ingested = Number(newIngestion[0].value);
+    // const failed = Number(newIngestion[1].value);
 
-    const successRate = ingested
-      ? `~${(((ingested - failed) / ingested) * 100).toFixed(2)}%`
-      : "~0%";
+    // const successRate = ingested
+    //   ? `~${(((ingested - failed) / ingested) * 100).toFixed(2)}%`
+    //   : "~0%";
 
-    newIngestion[2] = {
-      ...newIngestion[2],
-      value: successRate
-    };
+    // newIngestion[2] = {
+    //   ...newIngestion[2],
+    //   value: successRate
+    // };
 
     setFormData((prev) => ({ ...prev, ingestion: newIngestion }));
   };
@@ -225,7 +225,6 @@ const handleUsageChangeConsult = (week, key) => (e) => {
                   label={item.title}
                   value={item.value.toString()}
                   onChange={handleIngestionChange(idx)}
-                  disabled={idx == 2 ? true : false}
                 />
               </Grid>
             ))}

@@ -56,40 +56,59 @@ const initialState = {
 
     },
     ingestion: [
+         {
+            title: "Total indexed documents (unique):",
+            value: 1032,
+        },
         {
-            title: "Documents Ingested",
-            value: 6201,
+            title: "Net new documents this week:",
+            value: "+32",
+        },
+        {
+            title: "Ingestion runs:",
+            value: "6/7",
+        },
+        {
+            title: "Failed documents (latest run):",
+            value: 26,
         },
         
         {
-            title: "Failed Ingestions",
-            value: 90,
+            title: "Success rate:",
+            value: "99.56% (reason: too many req)",
         },
+      
         {
-            title: "Success Rate",
-            value: "~99%",
-        },
-        {
-            title: "previousValue",
-            value: 6000,
+            title: "Processing volume (full-load ingestion):",
+            value: 5928
         },
     ],
-    ingestion_consult: [
-        {
-            title: "Documents Ingested",
-            value: 6201,
-        },
-        {
-            title: "Failed Ingestions",
-            value: 90,
-        },
-        {
-            title: "Success Rate",
-            value: "~99%",
-        },
+    ingestion_consult:[
          {
-            title: "previousValue",
-            value: 6000,
+            title: "Total indexed documents (unique):",
+            value: 1032,
+        },
+        {
+            title: "Net new documents this week:",
+            value: "+32",
+        },
+        {
+            title: "Ingestion runs:",
+            value: "6/7",
+        },
+        {
+            title: "Failed documents (latest run):",
+            value: 26,
+        },
+        
+        {
+            title: "Success rate:",
+            value: "99.56% (reason: too many req)",
+        },
+      
+        {
+            title: "Processing volume (full-load ingestion):",
+            value: 5928
         },
     ],
     githubSummary: {
