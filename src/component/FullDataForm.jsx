@@ -243,7 +243,7 @@ const handleUsageChangeConsult = (week, key) => (e) => {
                   label={item.title}
                   value={item.value.toString()}
                   onChange={handleIngestionChangeConsult(idx)}
-                  disabled={idx == 2 ? true : false}
+                  // disabled={idx == 2 ? true : false}
                 />
               </Grid>
             ))}
