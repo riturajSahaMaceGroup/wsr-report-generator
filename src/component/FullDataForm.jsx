@@ -69,19 +69,6 @@ const handleUsageChangeConsult = (week, key) => (e) => {
     const newIngestion = [...formData.ingestion_consult];
     newIngestion[index] = { ...newIngestion[index], value: e.target.value };
     // calculate the success %
-
-    const ingested = Number(newIngestion[0].value);
-    const failed = Number(newIngestion[1].value);
-
-    const successRate = ingested
-      ? `~${(((ingested - failed) / ingested) * 100).toFixed(2)}%`
-      : "~0%";
-
-    newIngestion[2] = {
-      ...newIngestion[2],
-      value: successRate
-    };
-
     setFormData((prev) => ({ ...prev, ingestion_consult: newIngestion }));
   };
   const handleIngestionChange = (index) => (e) => {
