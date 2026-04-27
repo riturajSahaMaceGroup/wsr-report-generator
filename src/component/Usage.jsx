@@ -45,7 +45,7 @@ const Usage = ({type}) => {
         maxResponseTime: data["Max Response Time"],
         questionAsked: data["Questions Asked"],
         blockedPII: data["Blocked (PII)"],
-        resBeyond: data["Res. Beyond 3min"],
+        resBeyond: data["Res. Beyond 7min"],
         activeUser: data["Active User"]
       };
     });
