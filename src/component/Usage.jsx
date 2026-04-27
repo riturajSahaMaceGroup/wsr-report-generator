@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { RAG_STATUS } from './CostAnalysis'
 import useGetRagStatus from '../hooks/useGetRagStatus'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 const Usage = ({type}) => {
 
   const usage = type == "construct"?useSelector((state) => state.mForm.usage.construct):useSelector((state) => state.mForm.usage.consult)
@@ -45,52 +45,72 @@ const Usage = ({type}) => {
         maxResponseTime: data["Max Response Time"],
         questionAsked: data["Questions Asked"],
         blockedPII: data["Blocked (PII)"],
-        resBeyond: data["Res. Beyond 3min"]
+        resBeyond: data["Res. Beyond 3min"],
+        activeUser: data["Active User"]
       };
     });
     
     const cellStyle = {
       fontSize: '0.7rem', // Smaller font
-      padding: '2px 5px' // Minimal padding
+      padding: '1px 2px', // Minimal padding
     };
 
     return (
       <TableContainer component={Paper}
-        sx={{
-          width:"100%" , // Set a smaller width
-          // marginLeft: 2,
-          // mt: 2,
-          boxShadow: 3,
-          borderRadius: 2,
-          // marginTop:2,
-          marginBottom:2,
-         
-        }}
+      sx={{
+        width:"100%" , // Set a smaller width
+        // marginLeft: 2,
+        // mt: 2,
+        boxShadow: 3,
+        borderRadius: 2,
+        // marginTop:2,
+        marginBottom:2,
+       
+      }}
       >
-        <Table size='small'>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={cellStyle}><strong>Week</strong></TableCell>
-              <TableCell sx={cellStyle}><strong>Avg. Time</strong></TableCell>
-              <TableCell sx={cellStyle}><strong>Max Response Time</strong></TableCell>
-              <TableCell sx={cellStyle}><strong>Question Asked</strong></TableCell>
-              <TableCell sx={cellStyle}><strong>Blocked (PII)</strong></TableCell>
-              <TableCell sx={cellStyle}><strong>Res. beyond 3 min</strong></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {mResponseData.map((row) => (
-              <TableRow key={row.week}>
-                <TableCell sx={cellStyle}>{row.week}</TableCell>
-                <TableCell sx={cellStyle}>{row.avgResponseTime}</TableCell>
-                <TableCell sx={cellStyle}>{row.maxResponseTime}</TableCell>
-                <TableCell sx={cellStyle}>{row.questionAsked}</TableCell>
-                <TableCell sx={cellStyle}>{row.blockedPII}</TableCell>
-                <TableCell sx={cellStyle}>{row.resBeyond}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+      <Table size='small'>
+        <TableHead>
+        <TableRow>
+          <TableCell sx={cellStyle}><strong>Week</strong></TableCell>
+          <TableCell sx={cellStyle}><strong>Avg. Time</strong></TableCell>
+          <TableCell sx={cellStyle}><strong>Max. Time</strong></TableCell>
+          <TableCell sx={cellStyle}><strong>Question Asked</strong></TableCell>
+          <TableCell sx={cellStyle}><strong>Blocked (PII)</strong></TableCell>
+          <TableCell sx={cellStyle}><strong>Res. beyond 7 min</strong></TableCell>
+          <TableCell sx={{...cellStyle,paddingRight:"16px"}}><strong>Active User</strong></TableCell>
+        </TableRow>
+        </TableHead>
+        <TableBody>
+        {mResponseData.map((row, index) => {
+          const currentActiveUser = Number(row.activeUser);
+          const prevActiveUser = index < mResponseData.length - 1 ? Number(mResponseData[index + 1].activeUser) : currentActiveUser;
+          
+          let iconColor = "inherit";
+          if (currentActiveUser > prevActiveUser) iconColor = "green";
+          else if (currentActiveUser === prevActiveUser) iconColor = "#FFA500";
+          else iconColor = "red";
+
+          return (
+          <TableRow key={row.week}>
+            <TableCell sx={cellStyle}>{row.week}</TableCell>
+            <TableCell sx={cellStyle}>{row.avgResponseTime}</TableCell>
+            <TableCell sx={cellStyle}>{row.maxResponseTime}</TableCell>
+            <TableCell sx={cellStyle}>{row.questionAsked}</TableCell>
+            <TableCell sx={cellStyle}>{row.blockedPII}</TableCell>
+            <TableCell sx={cellStyle}>{row.resBeyond}</TableCell>
+            <TableCell sx={cellStyle}>{row.activeUser}{row.week === "curr.week" && <ArrowUpwardIcon sx={{
+            fontSize: "12px",
+            fontWeight:"bold",
+            paddingTop:"2px",
+            marginTop:"3px",
+            color: iconColor
+            }}/>}
+            </TableCell>
+          </TableRow>
+          );
+        })}
+        </TableBody>
+      </Table>
       </TableContainer>
     );
   };

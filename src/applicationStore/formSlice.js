@@ -13,21 +13,24 @@ const initialState = {
                 "Questions Asked": 195,
                 "Blocked (PII)": 14,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 5
+                "Res. Beyond 7min": 5,
+                "Active User": 120
             },
             week_1: {
                 "Avg. Response Time": "1.99 min",
                 "Questions Asked": 100,
                 "Blocked (PII)": 8,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 6
+                "Res. Beyond 7min": 6,
+                "Active User": 110
             },
             week_2: {
                 "Avg. Response Time": "2.58 min",
                 "Questions Asked": 90,
                 "Blocked (PII)": 0,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 7
+                "Res. Beyond 7min": 7,
+                "Active User": 100
             }
         },
         consult: {
@@ -36,21 +39,24 @@ const initialState = {
                 "Questions Asked": 195,
                 "Blocked (PII)": 14,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 8
+                "Res. Beyond 7min": 8,
+                "Active User": 120
             },
             week_1: {
                 "Avg. Response Time": "1.99 min",
                 "Questions Asked": 100,
                 "Blocked (PII)": 8,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 9
+                "Res. Beyond 7min": 9,
+                "Active User": 110
             },
             week_2: {
                 "Avg. Response Time": "2.58 min",
                 "Questions Asked": 90,
                 "Blocked (PII)": 0,
                 "Max Response Time": "5 min",
-                "Res. Beyond 3min": 10
+                "Res. Beyond 7min": 10,
+                "Active User": 100
             }
         }
 
