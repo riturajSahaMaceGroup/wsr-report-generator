@@ -7,6 +7,8 @@ import { RAG_STATUS } from './CostAnalysis'
 import useGetRagStatus from '../hooks/useGetRagStatus'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import CircleIcon from '@mui/icons-material/Circle';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 const Usage = ({type}) => {
 
   const usage = type == "construct"?useSelector((state) => state.mForm.usage.construct):useSelector((state) => state.mForm.usage.consult)
@@ -90,6 +92,11 @@ const Usage = ({type}) => {
           else if (currentActiveUser === prevActiveUser) iconColor = "#FFA500";
           else iconColor = "red";
 
+          let RAGArrow = "A";
+          if (currentActiveUser > prevActiveUser) RAGArrow = "G";
+          else if (currentActiveUser === prevActiveUser) RAGArrow = "Y";
+          else RAGArrow = "R";
+          
           return (
           <TableRow key={row.week}>
             <TableCell sx={cellStyle}>{row.week}</TableCell>
@@ -98,13 +105,25 @@ const Usage = ({type}) => {
             <TableCell sx={cellStyle}>{row.questionAsked}</TableCell>
             <TableCell sx={cellStyle}>{row.blockedPII}</TableCell>
             <TableCell sx={cellStyle}>{row.resBeyond}</TableCell>
-            <TableCell sx={cellStyle}>{row.activeUser}{row.week === "curr.week" && <ArrowUpwardIcon sx={{
+            <TableCell sx={cellStyle}>{row.activeUser}{row.week === "curr.week" && (RAGArrow === "G" ? <ArrowUpwardIcon sx={{
             fontSize: "12px",
             fontWeight:"bold",
             paddingTop:"2px",
             marginTop:"3px",
             color: iconColor
-            }}/>}
+            }}/> : RAGArrow === "Y" ? <CircleIcon sx={{
+              fontSize: "12px",
+              fontWeight:"bold",
+              paddingTop:"2px",
+              marginTop:"3px",
+              color: iconColor
+            }}/> : <ArrowDownwardIcon sx={{
+              fontSize: "12px",
+              fontWeight:"bold",
+              paddingTop:"2px",
+              marginTop:"3px",
+              color: iconColor
+            }}/>)}
             </TableCell>
           </TableRow>
           );
