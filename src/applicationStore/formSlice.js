@@ -4,7 +4,6 @@ const initialState = {
     cost: {
         spent: 555,
         budget: 1250,
-        PTU_Alert_Last_triggered: "14th May 2025"
     },
     usage: {
         construct: {

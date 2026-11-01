@@ -36,6 +36,7 @@ function App() {
         height: "100vh",
         width: "99vw",
         // border:"1px solid black",
+        padding: "1px",
         flex: 1
       }}>
         

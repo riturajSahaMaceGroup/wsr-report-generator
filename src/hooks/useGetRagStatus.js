@@ -6,6 +6,10 @@ import { useSelector } from 'react-redux';
  * @param {'cost' | 'usage' | 'dataIngestion'} statusOf
  * @returns {'R' | 'A' | 'G' | null}
  */
+export const extractNumber = (input) => {
+  const match = String(input).match(/-?[\d,]+(?:\.\d+)?/);
+  return match ? Number(match[0].replace(/,/g, "")) : 0;
+};
 const useGetRagStatus = (statusOf) => {
     // Simulated internal data source
     const value = useSelector((state)=> state.mForm)
@@ -24,7 +28,7 @@ const useGetRagStatus = (statusOf) => {
 
         switch (statusOf) {
             case 'cost':
-                const mCal = value.spent / value.budget * 100;
+                const mCal = extractNumber(value.spent) / extractNumber(value.budget) * 100;
                 // console.log("mCal: ",mCal)
                
                 return  mCal <= 70 ? "G" : mCal > 70 && mCal <= 85 ? "A" : "R";
