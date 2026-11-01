@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import useGetRagStatus from '../hooks/useGetRagStatus';
 import { DateRender } from '../App';
+import { extractNumber } from '../hooks/useGetRagStatus';
 export const Note = (props) => {
     const { title, value } = props
     return <div style={{
@@ -57,23 +58,23 @@ const CostAnalysis = () => {
             title: `Budget Per week`,
             value: `€${cost.budget}`
         },
-        {
-            title: `PTU Peak Alert Last triggered`,
-            value: `${cost.PTU_Alert_Last_triggered}`
-        },
+        
         ]
     }, [cost])
 
     return (
         <div style={{
             display: "flex",
+            minHeight: "70px",
+            alignItems: "center",
+            margin: "1px",
         }}>
             <div style={{
                 display: "flex",
                 flexDirection: "column",
-                flex: .5,
                 alignItems: "start",
-                fontSize: "14px"
+                fontSize: "14px",
+                flex: "1 1 0",
             }}>
 
                 {
@@ -86,19 +87,21 @@ const CostAnalysis = () => {
             <Divider orientation='vertical' sx={{ background: "#ed816680" }} />
             <div style={{
                 display: "flex",
-                flex: .5,
+                flex: "0 0 130px",
+                alignItems: "center",
             }}>
                 <PieChart
                     series={[
                         {
                             data: [
-                                { id: 0, value: cost.spent, label: 'Actual Cost Per week', color: "#867c8a" },
-                                { id: 1, value: cost.budget - cost.spent, label: 'Budget Per week: ', color: "#f1d4dc" },
+                                { id: 0, value: extractNumber(cost.spent), label: 'Actual', color: "#867c8a" },
+                                { id: 1, value: extractNumber(cost.budget) - extractNumber(cost.spent), label: 'Remaining', color: "#f1d4dc" },
                             ],
                         },
                     ]}
-                    width={100}
-                    height={60}
+                    slotProps={{ legend: { direction: "horizontal", sx: { fontSize: "10px" } } }}
+                    width={130}
+                    height={70}
                 />
             </div>
 
