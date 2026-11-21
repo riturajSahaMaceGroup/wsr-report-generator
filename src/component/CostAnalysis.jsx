@@ -66,7 +66,7 @@ const CostAnalysis = () => {
         <div style={{
             display: "flex",
             minHeight: "70px",
-            alignItems: "center",
+            // alignItems: "center",
             margin: "1px",
         }}>
             <div style={{
@@ -99,7 +99,7 @@ const CostAnalysis = () => {
                             ],
                         },
                     ]}
-                    slotProps={{ legend: { direction: "horizontal", sx: { fontSize: "10px" } } }}
+                    slotProps={{ legend: { direction: "vertical", sx: { fontSize: "10px" } } }}
                     width={130}
                     height={70}
                 />
