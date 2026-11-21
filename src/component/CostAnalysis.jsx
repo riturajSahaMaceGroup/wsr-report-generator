@@ -66,7 +66,7 @@ const CostAnalysis = () => {
         <div style={{
             display: "flex",
             minHeight: "70px",
-            alignItems: "center",
+            // alignItems: "center",
             margin: "1px",
         }}>
             <div style={{
