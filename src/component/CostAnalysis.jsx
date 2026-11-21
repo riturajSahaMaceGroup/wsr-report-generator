@@ -99,7 +99,7 @@ const CostAnalysis = () => {
                             ],
                         },
                     ]}
-                    slotProps={{ legend: { direction: "horizontal", sx: { fontSize: "10px" } } }}
+                    slotProps={{ legend: { direction: "vertical", sx: { fontSize: "10px" } } }}
                     width={130}
                     height={70}
                 />
